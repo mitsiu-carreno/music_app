@@ -44,6 +44,19 @@ var searchTracks = function (query) {
     });
 };
 
+var searchAll = function (query){
+    $.ajax({
+        url: 'https://api.spotify.com/v1/search',
+        data:{
+            q: query,
+            type: 'track,album,artist'
+        },
+        success: function (response){
+            resultsPlaceholder.innerHTML = template(response);
+        }
+    });
+}
+
 results.addEventListener('click', function(e) {
     var target = e.target;
     if (target !== null && target.classList.contains('cover')) {
@@ -72,6 +85,6 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
     e.preventDefault();
     console.log("fist =" + document.getElementById('query').value);
     //searchAlbums(document.getElementById('query').value);
-    searchTracks(document.getElementById('query').value);
+    searchAll(document.getElementById('query').value);
 }, false);
 }
