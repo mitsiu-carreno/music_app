@@ -62,5 +62,3 @@
 
 </body>
 </html>
-
-<?php include 'testing.php' ?>
