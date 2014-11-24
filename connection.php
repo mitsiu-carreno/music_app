@@ -2,15 +2,14 @@
 try{
 	$user="root";
 	$pass="mitc5003";
-	$connection = new PDO(
+	$db = new PDO(
 		'mysql:host=localhost;dbname=music_app', $user, $pass);
 	
-	foreach($connection ->query('select * from tracks') as $row){
+	foreach($db ->query('select * from tracks') as $row){
 		print_r($row);
 	}
-	$connection = null;
+	//$db = null;
 } catch (PDOException $e){
 	print "Error!!: " . $e->getMessage() . "<br/>";
 	die(); 
 }
-?>

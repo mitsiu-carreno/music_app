@@ -1,6 +1,7 @@
 <html>
 <head>
-	<? include 'connection.php' ?>
+	<?php include 'connection.php' ?>
+    
     <meta charset="UTF-8">
 	
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
@@ -61,3 +62,5 @@
 
 </body>
 </html>
+
+<?php include 'testing.php' ?>
