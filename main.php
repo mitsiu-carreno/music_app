@@ -1,6 +1,7 @@
 <html>
 <head>
-	<meta charset="UTF-8">
+	<? include 'connection.php' ?>
+    <meta charset="UTF-8">
 	
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="handlebars-v2.0.0.js"></script>
@@ -8,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Search for an Artist</h1>
+    <h1>Search for an Artist/Album/Track</h1>
     <form id="search-form">
         <input type="text" id="query" value="" class="form-control" />
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
