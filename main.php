@@ -23,7 +23,18 @@
     {{#each tracks.items}}
         <div style="width:50%; float:left">
             <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
-            <div style="float:left">{{id}}</div>
+            <div style="float:left; word-wrap: break-word;">
+                ID:{{id}}
+                <br>
+                NAME:{{name}}
+                <br>
+                ARTISTS:
+                {{#each artists}}
+                    {{name}}<br>
+                {{/each}}
+                ALBUM:{{album.name}}
+                
+            </div>
         </div>
     {{/each}}
     
@@ -54,8 +65,8 @@
 }
 
 .cover {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     display: inline-block;
     background-size: cover;
 }
