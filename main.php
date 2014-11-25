@@ -21,17 +21,26 @@
     
     <p>Tracks</p>
     {{#each tracks.items}}
-        <div style="background-image:url({{album.images.0.url}}); background-color:black" data-track-id="{{id}}" class="cover"></div>
+        <div style="width:50%; float:left">
+            <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
+            <div style="float:left">{{id}}</div>
+        </div>
     {{/each}}
     
     <p>Artists</p>
     {{#each albums.items}}
-        <div style="background-image:url({{images.0.url}})" data-artist-id="{{id}}" class="cover"></div>
+        <div style="width:50%; float:left">
+            <div style="background-image:url({{images.0.url}}); float:left" data-artist-id="{{id}}" class="cover"></div>
+            <div sytle="float:left">{{id}}</div>
+        </div>
     {{/each}}
 
     <p>Albums</p>
     {{#each albums.items}}
-        <div style="background-image:url({{images.0.url}})" data-album-id="{{id}}" class="cover"></div>
+        <div style="width:50%; float:left">
+            <div style="background-image:url({{images.0.url}}); float:left" data-album-id="{{id}}" class="cover"></div>
+            <div sytle="float:left">{{id}}</div>
+        </div>
     {{/each}}
 </script>
 
