@@ -16,6 +16,7 @@
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
+    <div id="test">Click me</div>
 </div>
 <script id="results-template" type="text/x-handlebars-template">
     
@@ -37,7 +38,7 @@
         </div>
     {{/each}}
     <br>
-    <button id="search-more">Cargar más tracks</button>
+    <div id="searchmore">Cargar más tracks</div>
     
     <br>
     <p>Artists</p>

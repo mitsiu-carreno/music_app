@@ -81,6 +81,10 @@ results.addEventListener('click', function(e) {
     }
 });
 
+test.addEventListener("click", function(){
+    console.log("testing");
+});
+
 document.getElementById('search-form').addEventListener('submit', function (e) {
     e.preventDefault();
     console.log("fist =" + document.getElementById('query').value);
