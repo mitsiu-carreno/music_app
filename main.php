@@ -37,7 +37,7 @@
         </div>
     {{/each}}
     <br>
-    <button><a href="{{albums.next}}">Cargar más tracks</a></button>
+    <button id="search-more">Cargar más tracks</button>
     
     <br>
     <p>Artists</p>
