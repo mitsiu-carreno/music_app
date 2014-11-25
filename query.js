@@ -81,9 +81,7 @@ results.addEventListener('click', function(e) {
     }
 });
 
-test.addEventListener("click", function(){
-    console.log("testing");
-});
+
 
 document.getElementById('search-form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -92,5 +90,14 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
     searchAll(document.getElementById('query').value);
 }, false);
 
+
+Handlebars.registerHelper("button", function (text) {
+    var button = $('<button></button>').text(text).attr('onclick', 'button_clickEvent()');
+    return $('<div></div>').append(button).html();
+});
+
+var button_clickEvent = function () {
+    alert("Button " + $(this).text() + " clicked.");
+};
 
 }

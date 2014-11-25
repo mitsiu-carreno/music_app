@@ -16,7 +16,6 @@
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
-    <div id="test">Click me</div>
 </div>
 <script id="results-template" type="text/x-handlebars-template">
     
@@ -73,6 +72,9 @@
             </div>
         </div>
     {{/each}}
+
+
+{{{button "Click Me!"}}}
 </script>
 
 <style type="text/css">
