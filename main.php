@@ -37,7 +37,7 @@
         </div>
     {{/each}}
     <br>
-    {{{button "Click me"}}}
+    {{{button "Click me" tracks.next }}}
     <br>
     <p>Artists</p>
     {{#each artists.items}}

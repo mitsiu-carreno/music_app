@@ -31,7 +31,14 @@ $(document).ready(function(){
         });
     }
 
-    
+    var search_more = function (url){
+        $.ajax({
+            url: url,
+            success: function (response){
+                resultsPlaceholder.innerHTML = template(response);
+            }
+        });
+    }   
 
     results.addEventListener('click', function(e) {
         var target = e.target;
@@ -56,7 +63,7 @@ $(document).ready(function(){
             }
         }
         else if(target.classList.contains('search_more_btn')) {
-            console.log("eureka");
+            search_more(target.id);
         }
     });
 
@@ -71,8 +78,9 @@ $(document).ready(function(){
 
 
 
-    Handlebars.registerHelper("button", function (text) {
-        var button = $('<button></button>').text(text).attr("class", "search_more_btn");
+    Handlebars.registerHelper("button", function (text, url) {
+        console.log(url);
+        var button = $('<button></button>').text(text).attr('class', 'search_more_btn').attr('id', url);
         return $('<div></div>').append(button).html();
     });
 
