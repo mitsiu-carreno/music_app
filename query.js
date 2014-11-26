@@ -16,34 +16,6 @@ var fetchTracks = function (albumId, callback) {
     });
 };
 
-var searchAlbums = function (query) {
-    console.log("second");
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'album'
-        },
-        success: function (response) {
-            resultsPlaceholder.innerHTML = template(response);
-        }
-    });
-};
-
-var searchTracks = function (query) {
-    console.log("search tracks");
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'track'
-        },
-        success: function (response){
-            resultsPlaceholder.innerHTML = template(response);
-        }
-    });
-};
-
 var searchAll = function (query){
     $.ajax({
         url: 'https://api.spotify.com/v1/search',
@@ -56,6 +28,20 @@ var searchAll = function (query){
         }
     });
 }
+
+var search_more = function (query, type){
+    $.ajax({
+        url: 'https://api.spotify.com/v1/search',
+        data:{
+            q: query,
+            type: type,
+            offset: 20
+        },
+        success: function (response){
+            resultsPlaceholder.innerHTML = template(response);
+        }
+    });
+};
 
 results.addEventListener('click', function(e) {
     var target = e.target;
@@ -91,6 +77,7 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
 }, false);
 
 
+}
 
 Handlebars.registerHelper("more_tracks", function (text) {
     console.log(text);
@@ -98,9 +85,8 @@ Handlebars.registerHelper("more_tracks", function (text) {
     return $('<div></div>').append(load_tracks_button).html();
 });
 
-
-
-}
 var load_tracks = function () {
-    alert("Button " + $(this).text() + " clicked.");
+    search_more(document.getElementById('query').value, "track");
 };
+
+

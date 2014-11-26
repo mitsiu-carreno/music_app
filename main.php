@@ -37,7 +37,7 @@
         </div>
     {{/each}}
     <br>
-    {{{more_tracks "+ tracks"}}}
+    {{{more_tracks "+ tracks" tracks.next}}}
     
     
     <br>
