@@ -1,3 +1,17 @@
+Handlebars.registerHelper("more_tracks", function (text) {
+    //console.log(text);
+    var load_tracks_button = $('<button></button>').text(text).attr('onclick', 'load_tracks()');
+    return $('<div></div>').append(load_tracks_button).html();
+});
+
+var load_tracks = function () {
+    console.log("load_tracks");
+    search_more(document.getElementById('query').value, "track");
+};
+
+
+
+
 window.onload = function(){
 // find template and compile it
 var templateSource = document.getElementById('results-template').innerHTML,
@@ -78,15 +92,4 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
 
 
 }
-
-Handlebars.registerHelper("more_tracks", function (text) {
-    console.log(text);
-    var load_tracks_button = $('<button></button>').text(text).attr('onclick', 'load_tracks()');
-    return $('<div></div>').append(load_tracks_button).html();
-});
-
-var load_tracks = function () {
-    search_more(document.getElementById('query').value, "track");
-};
-
 
