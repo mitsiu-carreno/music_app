@@ -1,18 +1,6 @@
-    Handlebars.registerHelper("more_tracks", function (text) {
-        //console.log(text);
-        var load_tracks_button = $('<button></button>').text(text).attr('onclick', 'load_tracks()');
-        return $('<div></div>').append(load_tracks_button).html();
-    });
 
-    var load_tracks = function () {
-        console.log("load_tracks");
-        search_more(document.getElementById('query').value, "track");
-    };
-
-
-
-
-window.onload = function(){
+$(document).ready(function(){
+//window.onload = function(){
     // find template and compile it
     var templateSource = document.getElementById('results-template').innerHTML,
         template = Handlebars.compile(templateSource),
@@ -43,19 +31,7 @@ window.onload = function(){
         });
     }
 
-    var search_more = function (query, type){
-        $.ajax({
-            url: 'https://api.spotify.com/v1/search',
-            data:{
-                q: query,
-                type: type,
-                offset: 20
-            },
-            success: function (response){
-                resultsPlaceholder.innerHTML = template(response);
-            }
-        });
-    };
+    
 
     results.addEventListener('click', function(e) {
         var target = e.target;
@@ -79,6 +55,9 @@ window.onload = function(){
                 });
             }
         }
+        else if(target.classList.contains('search_more_btn')) {
+            console.log("eureka");
+        }
     });
 
 
@@ -91,5 +70,12 @@ window.onload = function(){
     }, false);
 
 
-}
+
+    Handlebars.registerHelper("button", function (text) {
+        var button = $('<button></button>').text(text).attr("class", "search_more_btn");
+        return $('<div></div>').append(button).html();
+    });
+
+});
+
 

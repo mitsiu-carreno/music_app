@@ -37,9 +37,7 @@
         </div>
     {{/each}}
     <br>
-    {{{more_tracks "+ tracks" tracks.next}}}
-    
-    
+    {{{button "Click me"}}}
     <br>
     <p>Artists</p>
     {{#each artists.items}}
