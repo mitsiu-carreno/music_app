@@ -77,6 +77,11 @@
 {{{button "Click Me!"}}}
 </script>
 
+<script type="text/javascript">
+var button_clickEvent = function () {
+    alert("Button " + $(this).text() + " clicked.");
+};
+</script>
 <style type="text/css">
 	body {
     padding: 20px;

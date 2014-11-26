@@ -91,13 +91,12 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
 }, false);
 
 
+
 Handlebars.registerHelper("button", function (text) {
     var button = $('<button></button>').text(text).attr('onclick', 'button_clickEvent()');
     return $('<div></div>').append(button).html();
 });
 
-var button_clickEvent = function () {
-    alert("Button " + $(this).text() + " clicked.");
-};
+
 
 }
