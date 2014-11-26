@@ -23,7 +23,8 @@ $(document).ready(function(){
             url: 'https://api.spotify.com/v1/search',
             data:{
                 q: query,
-                type: 'track,album,artist'
+                type: 'track,album,artist',
+                limit: 4
             },
             success: function (response){
                 resultsPlaceholder.innerHTML = template(response);
@@ -35,7 +36,7 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             success: function (response){
-                resultsPlaceholder.innerHTML = template(response);
+                resultsPlaceholder.innerHTML += template(response);
             }
         });
     }   
