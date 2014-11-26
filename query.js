@@ -92,11 +92,15 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
 
 
 
-Handlebars.registerHelper("button", function (text) {
-    var button = $('<button></button>').text(text).attr('onclick', 'button_clickEvent()');
-    return $('<div></div>').append(button).html();
+Handlebars.registerHelper("more_tracks", function (text) {
+    console.log(text);
+    var load_tracks_button = $('<button></button>').text(text).attr('onclick', 'load_tracks()');
+    return $('<div></div>').append(load_tracks_button).html();
 });
 
 
 
 }
+var load_tracks = function () {
+    alert("Button " + $(this).text() + " clicked.");
+};
