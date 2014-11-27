@@ -4,19 +4,12 @@ $(document).ready(function(){
     // find template and compile it
     var templateSource = document.getElementById('results-template').innerHTML,
         template = Handlebars.compile(templateSource),
-        resultsPlaceholder = document.getElementById('results'),
-        playingCssClass = 'playing',
-        audioObject = null;
+        resultsPlaceholder = document.getElementById('results');
 
-    var fetchTracks = function (albumId, callback) {
-        console.log("play");
-        $.ajax({
-            url: 'https://api.spotify.com/v1/albums/' + albumId,
-            success: function (response) {
-                callback(response);
-            }
-        });
-    };
+    document.getElementById('search-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        searchAll(document.getElementById('query').value);
+    }, false);
 
     var searchAll = function (query){
         $.ajax({
@@ -32,59 +25,33 @@ $(document).ready(function(){
         });
     }
 
-    var search_more = function (url){
+    var search_more = function (url, type){
+        console.log("eureka:" + url + "  type=" + type);
         $.ajax({
             url: url,
             success: function (response){
-                resultsPlaceholder.innerHTML += template(response);
+                resultsPlaceholder.innerHTML += template(response); //<----ERROR HERE
             }
         });
     }   
 
-    results.addEventListener('click', function(e) {
-        var target = e.target;
-        console.log(target);
-        if (target !== null && target.classList.contains('cover')) {
-            if (target.classList.contains(playingCssClass)) {
-                audioObject.pause();
-            } else {
-                if (audioObject) {
-                    audioObject.pause();
-                }
-                fetchTracks(target.getAttribute('data-album-id'), function(data) {            
-                    audioObject = new Audio(data.tracks.items[0].preview_url);
-                    audioObject.play();
-                    target.classList.add(playingCssClass);
-                    audioObject.addEventListener('ended', function() {
-                        target.classList.remove(playingCssClass);
-                    });
-                    audioObject.addEventListener('pause', function() {
-                        target.classList.remove(playingCssClass);
-                   });
-                });
-            }
-        }
-        else if(target.classList.contains('search_more_btn')) {
-            var type = target.attributes.searchType.value;
-            console.log("type" + type);
-            search_more(target.id);
-        }
+    $(document).on('click', '.search_more_btn', function(){
+        search_more($(this).attr('path'), $(this).attr('searchType'));
     });
 
+    Handlebars.registerHelper("add_tracks", function (text, url) {
+        //console.log(url);
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'track'});
+        return $('<div></div>').append(button).html();
+    });
 
+    Handlebars.registerHelper("add_artists", function (text, url){
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artist'});
+        return $('<div></div>').append(button).html();
+    });
 
-    document.getElementById('search-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        //console.log("fist =" + document.getElementById('query').value);
-        //searchAlbums(document.getElementById('query').value);
-        searchAll(document.getElementById('query').value);
-    }, false);
-
-
-
-    Handlebars.registerHelper("ad_tracks", function (text, url) {
-        console.log(url);
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', id:url, searchType: 'track'});
+    Handlebars.registerHelper("add_albums", function (text, url){
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'album'});
         return $('<div></div>').append(button).html();
     });
 

@@ -23,7 +23,7 @@
     {{#each tracks.items}}
         <div id="tracks_results" style="width:50%; float:left">
             <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
-            <div style="float:left">
+            <div id="track_info" style="float:left">
                 ID:{{id}}
                 <br>
                 TRACK_NAME:{{name}}
@@ -37,9 +37,9 @@
         </div>
     {{/each}}
     <br>
-    <div></div>
-    {{{ad_tracks "+ Tracks" tracks.next }}}
+    {{{add_tracks "+ Tracks" tracks.next }}}
     <br>
+
     <p>Artists</p>
     {{#each artists.items}}
         <div style="width:50%; float:left">
@@ -60,6 +60,9 @@
             </div>
         </div>
     {{/each}}
+    <br>
+    {{{add_artists "+ Artists" artists.next }}}
+    <br>
 
     <p>Albums</p>
     {{#each albums.items}}
@@ -72,7 +75,9 @@
             </div>
         </div>
     {{/each}}
-
+    <br>
+    {{{add_albums "+ Albums" albums.next}}}
+    <br>
 </script>
 
 <style type="text/css">
