@@ -21,7 +21,7 @@
     
     <p>Tracks</p>
     {{#each tracks.items}}
-        <div style="width:50%; float:left">
+        <div id="tracks_results" style="width:50%; float:left">
             <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
             <div style="float:left">
                 ID:{{id}}
@@ -37,7 +37,8 @@
         </div>
     {{/each}}
     <br>
-    {{{button "Click me" tracks.next }}}
+    <div></div>
+    {{{ad_tracks "+ Tracks" tracks.next }}}
     <br>
     <p>Artists</p>
     {{#each artists.items}}

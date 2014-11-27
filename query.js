@@ -43,6 +43,7 @@ $(document).ready(function(){
 
     results.addEventListener('click', function(e) {
         var target = e.target;
+        console.log(target);
         if (target !== null && target.classList.contains('cover')) {
             if (target.classList.contains(playingCssClass)) {
                 audioObject.pause();
@@ -64,6 +65,8 @@ $(document).ready(function(){
             }
         }
         else if(target.classList.contains('search_more_btn')) {
+            var type = target.attributes.searchType.value;
+            console.log("type" + type);
             search_more(target.id);
         }
     });
@@ -72,16 +75,16 @@ $(document).ready(function(){
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        console.log("fist =" + document.getElementById('query').value);
+        //console.log("fist =" + document.getElementById('query').value);
         //searchAlbums(document.getElementById('query').value);
         searchAll(document.getElementById('query').value);
     }, false);
 
 
 
-    Handlebars.registerHelper("button", function (text, url) {
+    Handlebars.registerHelper("ad_tracks", function (text, url) {
         console.log(url);
-        var button = $('<button></button>').text(text).attr('class', 'search_more_btn').attr('id', url);
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', id:url, searchType: 'track'});
         return $('<div></div>').append(button).html();
     });
 
