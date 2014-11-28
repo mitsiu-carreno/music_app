@@ -6,7 +6,7 @@
 	
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="handlebars-v2.0.0.js"></script>
-	<script type="text/javascript" src="query.js"></script>
+	<script type="text/javascript" src="query2.js"></script>
 </head>
 <body>
 <div class="container">
@@ -22,9 +22,9 @@
 <script id="results-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
     <div id="tracks_results">
-        {{#each tracks.items}}
+        
             {{> track}}
-        {{/each}}
+        
     </div>
     <br>
     {{{add_tracks "+ Tracks" tracks.next}}}
@@ -33,8 +33,9 @@
 
 <!--Partial-->
 <script id="track-partial" type="text/x-handlebars-template">
+{{#each tracks.items}}
     <div id="track" style="width:50%; float:left">
-        <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>    
+            <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>    
         <div id="track_info" style="float:left">
             ID:{{id}}
             <br>
@@ -47,6 +48,7 @@
             ALBUM:{{album.name}}
         </div>
     </div>
+    {{/each}}
 </script>
 
 <!--
