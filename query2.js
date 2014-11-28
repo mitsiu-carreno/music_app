@@ -36,47 +36,48 @@ $(document).ready(function(){
         });
     }
 
-    var search_more = function (url, type, funct){
-        //console.log("eureka:" + url + "  type=" + type);
+    var search_more = function (url, type, btn_id){
         $.ajax({
             url: url,
             success: function (response){
+            	$("#"+btn_id).removeAttr("path");
             	switch (type){
             		case "tracks_results": 
             			$("#"+type).append(partial_track(response));
+            			$("#"+btn_id).attr("path", response.tracks.next);
             			break; 
             		case "artists_results":
-            			console.log("debugging");
             			$("#"+type).append(partial_artist(response));
+            			$("#"+btn_id).attr("path", response.artists.next);
             			break;
             		case "albums_results":
             			$("#"+type).append(partial_album(response));
+            			$("#"+btn_id).attr("path", response.albums.next);
             			break;
             		default:
             			console.log("Sh*t didn't work");
-            	}  
+            	}
             }
         });
     }   
 
     $(document).on('click', '.search_more_btn', function(){
-        search_more($(this).attr('path'), $(this).attr('searchType'));
+        search_more($(this).attr('path'), $(this).attr('searchType'), $(this).attr('id'));
     });
 
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
-        //console.log(url);
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_artists", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_albums", function (text, url){
-    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results'});
+    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results', id:'add_albums'});
     	return $('<div></div>').append(button).html();
     });
 });
