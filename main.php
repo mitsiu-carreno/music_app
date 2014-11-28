@@ -29,11 +29,11 @@
     <br>
 
     <h1>Artists</h1>
-    <div id="artist_resutls">
+    <div id="artists_results">
         {{> artist}}
     </div>
     <br>
-    {{{add_artists "+ Artists" artist.next}}}
+    {{{add_artists "+ Artists" artists.next}}}
     <br>
 
     <h1>Albums</h1>

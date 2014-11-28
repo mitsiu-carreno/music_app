@@ -1,33 +1,21 @@
 $(document).ready(function(){
-	/*var templateSource = document.getElementById('results-template').innerHTML,
-        template = Handlebars.compile(templateSource),
-        partialSource = document.getElementById('track-partial').innerHTML,
-        resultsPlaceholder = document.getElementById('results');
 
-	var source = $("#results-template").html(),
-		contentSrc = $("#track-partial").html(),
-		template = Handlebars.compile(source),
-		contentTemplate = Handlebars.compile(contentSrc),
-		resultsPlaceholder = document.getElementById('results
-
-	*/
-
-	var templateSource = document.getElementById('results-template').innerHTML,
-		partialSource = document.getElementById('track-partial').innerHTML,
-		partialSource2 = document.getElementById('artist-partial').innerHTML,
-		partialSource3 = document.getElementById('album-partial').innerHTML,
-		template = Handlebars.compile(templateSource),
-		contentTemplate = Handlebars.compile(partialSource),
-		contentTemplate2 = Handlebars.compile(partialSource2),
-		contentTemplate3 = Handlebars.compile(partialSource3),
+	var template_source = document.getElementById('results-template').innerHTML,
+		partial_track_source = document.getElementById('track-partial').innerHTML,
+		partial_artist_source = document.getElementById('artist-partial').innerHTML,
+		partial_album_source = document.getElementById('album-partial').innerHTML,
+		template = Handlebars.compile(template_source),
+		partial_track = Handlebars.compile(partial_track_source),
+		partial_artist = Handlebars.compile(partial_artist_source),
+		partial_album = Handlebars.compile(partial_album_source),
 		resultsPlaceholder = document.getElementById('results');
 
 
-	Handlebars.registerPartial("track", contentTemplate);
+	Handlebars.registerPartial("track", partial_track);
 
-	Handlebars.registerPartial("artist", contentTemplate2);
+	Handlebars.registerPartial("artist", partial_artist);
 
-	Handlebars.registerPartial("album", contentTemplate3);
+	Handlebars.registerPartial("album", partial_album);
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -48,16 +36,25 @@ $(document).ready(function(){
         });
     }
 
-    var search_more = function (url, type){
-        console.log("eureka:" + url + "  type=" + type);
+    var search_more = function (url, type, funct){
+        //console.log("eureka:" + url + "  type=" + type);
         $.ajax({
             url: url,
             success: function (response){
-            	//var newContent = document.getElementById('tracks_results');
-            	//newContent.innerHTML= contentTemplate(response);
-                //$("#tracks_results").append(contentTemplate (response));
-                $("#tracks_results").append(contentTemplate(response));
-                //resultsPlaceholder.innerHTML += template(response); //<----ERROR HERE
+            	switch (type){
+            		case "tracks_results": 
+            			$("#"+type).append(partial_track(response));
+            			break; 
+            		case "artists_results":
+            			console.log("debugging");
+            			$("#"+type).append(partial_artist(response));
+            			break;
+            		case "albums_results":
+            			$("#"+type).append(partial_album(response));
+            			break;
+            		default:
+            			console.log("Sh*t didn't work");
+            	}  
             }
         });
     }   
@@ -69,17 +66,17 @@ $(document).ready(function(){
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
         //console.log(url);
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'track'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_artists", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artist'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_albums", function (text, url){
-    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'album'});
+    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results'});
     	return $('<div></div>').append(button).html();
     });
 });
