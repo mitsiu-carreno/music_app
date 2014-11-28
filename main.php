@@ -27,12 +27,21 @@
     <br>
     {{{add_tracks "+ Tracks" tracks.next}}}
     <br>
-    <h1>Artist</h1>
+
+    <h1>Artists</h1>
     <div id="artist_resutls">
         {{> artist}}
     </div>
     <br>
-    {{{add_artists "+ Artist" artist.next}}}
+    {{{add_artists "+ Artists" artist.next}}}
+    <br>
+
+    <h1>Albums</h1>
+    <div id="albums_results">
+        {{> album}}
+    </div>
+    <br>
+    {{{add_albums "+ Albums" albums.next}}}
     <br>
 </script>
 
@@ -71,6 +80,19 @@
                 ID:{{id}}
                 <br>
                 ARTIST_NAME:{{name}}
+            </div>
+        </div>
+    {{/each}}
+</script>
+
+<script id="album-partial" type="text/x-handlebars-template">
+    {{#each albums.items}}
+        <div id="album" style="width:50%; float:left">
+            <div style="background-image:url({{images.0.url}}); float:left" 1data-album-id="{{id}}" class="cover"></div>
+            <div id="album_info" style="float:left">
+                ID:{{id}}
+                <br>
+                ALBUM_NAME:{{name}}
             </div>
         </div>
     {{/each}}

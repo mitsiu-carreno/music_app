@@ -15,15 +15,19 @@ $(document).ready(function(){
 	var templateSource = document.getElementById('results-template').innerHTML,
 		partialSource = document.getElementById('track-partial').innerHTML,
 		partialSource2 = document.getElementById('artist-partial').innerHTML,
+		partialSource3 = document.getElementById('album-partial').innerHTML,
 		template = Handlebars.compile(templateSource),
 		contentTemplate = Handlebars.compile(partialSource),
 		contentTemplate2 = Handlebars.compile(partialSource2),
+		contentTemplate3 = Handlebars.compile(partialSource3),
 		resultsPlaceholder = document.getElementById('results');
 
 
 	Handlebars.registerPartial("track", contentTemplate);
 
 	Handlebars.registerPartial("artist", contentTemplate2);
+
+	Handlebars.registerPartial("album", contentTemplate3);
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -35,7 +39,7 @@ $(document).ready(function(){
             url: 'https://api.spotify.com/v1/search',
             data:{
                 q: query,
-                type: 'track,artist',
+                type: 'track,artist,album',
                 limit: 4
             },
             success: function (response){
@@ -72,5 +76,10 @@ $(document).ready(function(){
     Handlebars.registerHelper("add_artists", function (text, url){
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artist'});
         return $('<div></div>').append(button).html();
+    });
+
+    Handlebars.registerHelper("add_albums", function (text, url){
+    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'album'});
+    	return $('<div></div>').append(button).html();
     });
 });
