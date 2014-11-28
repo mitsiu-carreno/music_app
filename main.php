@@ -47,55 +47,67 @@
 
 <!--Partials-->
 <script id="track-partial" type="text/x-handlebars-template">
-    {{#each tracks.items}}
-        <div id="track" style="width:50%; float:left">
-            <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>    
-            <div id="track_info" style="float:left">
-                ID:{{id}}
-                <br>
-                TRACK_NAME:{{name}}
-                <br>
-                ARTISTS:
-                    {{#each artists}}
-                        {{name}}<br>
-                    {{/each}}
-                ALBUM:{{album.name}}
+    {{#if tracks.items}}
+        {{#each tracks.items}}
+            <div class="track" id="{{id}}" style="width:50%; float:left">
+                <div style="background-image:url({{album.images.0.url}}); float:left" class="cover"></div>    
+                <div id="track_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    TRACK_NAME:{{name}}
+                    <br>
+                    ARTISTS:
+                        {{#each artists}}
+                            {{name}}<br>
+                        {{/each}}
+                    ALBUM:{{album.name}}
+                </div>
             </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    {{else}}
+    <p>No se encontró ningún track :(</p>
+    {{/if}}
 </script>
 
 <script id="artist-partial" type="text/x-handlebars-template">
-    {{#each artists.items}}
-        <div id="artist" style="width:50%; float:left">
-            <div style="background-image:url(
-                    {{#if images.0.url}}
-                        {{images.0.url}}
-                    {{else}}
-                        https://ssl.gstatic.com/accounts/ui/avatar_2x.png
-                    {{/if}});
-                float:left" data-artist-id="{{id}}" class="cover">
+    {{#if artists.items}} 
+        {{#each artists.items}}
+            <div class="artist" id="{{id}}" style="width:50%; float:left">
+                <div style="background-image:url(
+                        {{#if images.0.url}}
+                            {{images.0.url}}
+                        {{else}}
+                            https://ssl.gstatic.com/accounts/ui/avatar_2x.png
+                        {{/if}});
+                    float:left"  class="cover">
+                </div>
+                <div id="artist_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    ARTIST_NAME:{{name}}
+                </div>
             </div>
-            <div id="artist_info" style="float:left">
-                ID:{{id}}
-                <br>
-                ARTIST_NAME:{{name}}
-            </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    {{else}}
+    <p>No se encontró ningún artista :(</p>
+    {{/if}}
 </script>
 
 <script id="album-partial" type="text/x-handlebars-template">
-    {{#each albums.items}}
-        <div id="album" style="width:50%; float:left">
-            <div style="background-image:url({{images.0.url}}); float:left" 1data-album-id="{{id}}" class="cover"></div>
-            <div id="album_info" style="float:left">
-                ID:{{id}}
-                <br>
-                ALBUM_NAME:{{name}}
+    {{#if albums.items}}
+        {{#each albums.items}}
+            <div class="album" id="{{id}}" style="width:50%; float:left">
+                <div style="background-image:url({{images.0.url}}); float:left" class="cover"></div>
+                <div id="album_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    ALBUM_NAME:{{name}}
+                </div>
             </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    {{else}}
+    <p>No se encontró ningún album :(</p>
+    {{/if}}
 </script>
 
 <!--

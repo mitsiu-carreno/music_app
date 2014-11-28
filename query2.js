@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
+    var api_spotify = 'https://api.spotify.com/v1/';
 
 	var template_source = document.getElementById('results-template').innerHTML,
 		partial_track_source = document.getElementById('track-partial').innerHTML,
@@ -24,7 +26,7 @@ $(document).ready(function(){
 
     var searchAll = function (query){
         $.ajax({
-            url: 'https://api.spotify.com/v1/search',
+            url: api_spotify + "search",
             data:{
                 q: query,
                 type: 'track,artist,album',
@@ -65,6 +67,23 @@ $(document).ready(function(){
         search_more($(this).attr('path'), $(this).attr('searchType'), $(this).attr('id'));
     });
 
+    $(document).on('click', '.track, .album, .artist', function(){
+        console.log($(this));
+        var id=$(this).context.id;
+        $.ajax({
+            url:api_spotify + "tracks/"+ id,
+            success: function(response){
+                console.log(response);
+            }
+        });
+        /*          <------------------------------------Completar error en 74
+        $.ajax({
+            type: "POST",
+            url: global_url + "/insert.php",
+            contentTYpe
+        });
+        */
+    });
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
