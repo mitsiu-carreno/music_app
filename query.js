@@ -4,6 +4,7 @@ $(document).ready(function(){
     // find template and compile it
     var templateSource = document.getElementById('results-template').innerHTML,
         template = Handlebars.compile(templateSource),
+        partialSource = document.getElementById('track-partial').innerHTML,
         resultsPlaceholder = document.getElementById('results');
 
     document.getElementById('search-form').addEventListener('submit', function (e) {
@@ -30,7 +31,7 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             success: function (response){
-                $("#tracks_results").html(template(response));
+                $("#track").append(template(response));
                 //resultsPlaceholder.innerHTML += template(response); //<----ERROR HERE
             }
         });
@@ -56,6 +57,7 @@ $(document).ready(function(){
         return $('<div></div>').append(button).html();
     });
 
+    Handlebars.registerPartial("track", $("#track-partial").html())
 });
 
 

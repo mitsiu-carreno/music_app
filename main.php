@@ -17,6 +17,39 @@
     </form>
     <div id="results"></div>
 </div>
+
+<!--Template-->
+<script id="results-template" type="text/x-handlebars-template">
+    <h1>Tracks</h1>
+    <div id="tracks_results">
+        {{#each tracks.items}}
+            {{> track}}
+        {{/each}}
+    </div>
+    <br>
+    {{{add_tracks "+ Tracks" tracks.next}}}
+    <br>
+</script>
+
+<!--Partial-->
+<script id="track-partial" type="text/x-handlebars-template">
+    <div id="track" style="width:50%; float:left">
+        <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>    
+        <div id="track_info" style="float:left">
+            ID:{{id}}
+            <br>
+            TRACK_NAME:{{name}}
+            <br>
+            ARTISTS:
+                {{#each artists}}
+                    {{name}}<br>
+                {{/each}}
+            ALBUM:{{album.name}}
+        </div>
+    </div>
+</script>
+
+<!--
 <script id="results-template" type="text/x-handlebars-template">
     <p>Tracks</p>
     <div id="tracks_results"></div>
@@ -57,7 +90,7 @@
                 <br>
                 ARTISTS_NAME:{{name}}
                 <!--<br>
-                GENRES:{{genres}}-->
+                GENRES:{{genres}}--><!--
             </div>
         </div>
     {{/each}}
@@ -80,7 +113,7 @@
     {{{add_albums "+ Albums" albums.next}}}
     <br>
 </script>
-
+-->
 
 <style type="text/css">
 	body {
