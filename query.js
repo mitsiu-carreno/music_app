@@ -16,7 +16,7 @@ $(document).ready(function(){
             url: 'https://api.spotify.com/v1/search',
             data:{
                 q: query,
-                type: 'track,album,artist',
+                type: 'track',
                 limit: 4
             },
             success: function (response){
@@ -30,7 +30,8 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             success: function (response){
-                resultsPlaceholder.innerHTML += template(response); //<----ERROR HERE
+                $("#tracks_results").html(template(response));
+                //resultsPlaceholder.innerHTML += template(response); //<----ERROR HERE
             }
         });
     }   

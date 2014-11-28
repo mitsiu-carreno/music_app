@@ -18,24 +18,25 @@
     <div id="results"></div>
 </div>
 <script id="results-template" type="text/x-handlebars-template">
-    
     <p>Tracks</p>
-    {{#each tracks.items}}
-        <div id="tracks_results" style="width:50%; float:left">
-            <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
-            <div id="track_info" style="float:left">
-                ID:{{id}}
-                <br>
-                TRACK_NAME:{{name}}
-                <br>
-                ARTISTS:
-                {{#each artists}}
-                    {{name}}<br>
-                {{/each}}
-                ALBUM:{{album.name}}
+    <div id="tracks_results"></div>
+        {{#each tracks.items}}
+            <div id="track" style="width:50%; float:left">
+                <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>
+                <div id="track_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    TRACK_NAME:{{name}}
+                    <br>
+                    ARTISTS:
+                    {{#each artists}}
+                        {{name}}<br>
+                    {{/each}}
+                    ALBUM:{{album.name}}
+                </div>
             </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    </div>
     <br>
     {{{add_tracks "+ Tracks" tracks.next }}}
     <br>
@@ -79,6 +80,7 @@
     {{{add_albums "+ Albums" albums.next}}}
     <br>
 </script>
+
 
 <style type="text/css">
 	body {
