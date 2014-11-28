@@ -22,32 +22,57 @@
 <script id="results-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
     <div id="tracks_results">
-        
-            {{> track}}
-        
+        {{> track}}
     </div>
     <br>
     {{{add_tracks "+ Tracks" tracks.next}}}
     <br>
+    <h1>Artist</h1>
+    <div id="artist_resutls">
+        {{> artist}}
+    </div>
+    <br>
+    {{{add_artists "+ Artist" artist.next}}}
+    <br>
 </script>
 
-<!--Partial-->
+<!--Partials-->
 <script id="track-partial" type="text/x-handlebars-template">
-{{#each tracks.items}}
-    <div id="track" style="width:50%; float:left">
+    {{#each tracks.items}}
+        <div id="track" style="width:50%; float:left">
             <div style="background-image:url({{album.images.0.url}}); float:left" data-track-id="{{id}}" class="cover"></div>    
-        <div id="track_info" style="float:left">
-            ID:{{id}}
-            <br>
-            TRACK_NAME:{{name}}
-            <br>
-            ARTISTS:
-                {{#each artists}}
-                    {{name}}<br>
-                {{/each}}
-            ALBUM:{{album.name}}
+            <div id="track_info" style="float:left">
+                ID:{{id}}
+                <br>
+                TRACK_NAME:{{name}}
+                <br>
+                ARTISTS:
+                    {{#each artists}}
+                        {{name}}<br>
+                    {{/each}}
+                ALBUM:{{album.name}}
+            </div>
         </div>
-    </div>
+    {{/each}}
+</script>
+
+<script id="artist-partial" type="text/x-handlebars-template">
+    {{#each artists.items}}
+        <div id="artist" style="width:50%; float:left">
+            <div style="background-image:url(
+                    {{#if images.0.url}}
+                        {{images.0.url}}
+                    {{else}}
+                        https://ssl.gstatic.com/accounts/ui/avatar_2x.png
+                    {{/if}});
+                float:left" data-artist-id="{{id}}" class="cover">
+            </div>
+            <div id="artist_info" style="float:left">
+                ID:{{id}}
+                <br>
+                ARTIST_NAME:{{name}}
+            </div>
+        </div>
     {{/each}}
 </script>
 
