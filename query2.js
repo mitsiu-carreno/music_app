@@ -73,16 +73,17 @@ $(document).ready(function(){
         $.ajax({
             url:api_spotify + type + "s/"+ id,
             success: function(response){
+                var resp = response
                 $.ajax({
                     type: "POST",
                     url: global_url + "insert.php",
-                    data: response,
-                    dataType: "json",
+                    data: resp,
+                    
                     success: function(result){
                         console.log("success");
                     },
                     error: function (request, status, errorThrown){
-                        console.log("Saving error:" + status, errorThrown);
+                        console.log("Sending error:" + status, errorThrown);
                     }
                 });
             }
