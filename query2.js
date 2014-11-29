@@ -73,16 +73,20 @@ $(document).ready(function(){
         $.ajax({
             url:api_spotify + type + "s/"+ id,
             success: function(response){
-                //console.log(response);
+                $.ajax({
+                    type: "POST",
+                    url: global_url + "insert.php",
+                    data: response,
+                    dataType: "json",
+                    success: function(result){
+                        console.log("success");
+                    },
+                    error: function (request, status, errorThrown){
+                        console.log("Saving error:" + status, errorThrown);
+                    }
+                });
             }
         });
-        /*          <------------------------------------Completar error en 74
-        $.ajax({
-            type: "POST",
-            url: global_url + "/insert.php",
-            contentTYpe
-        });
-        */
     });
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
