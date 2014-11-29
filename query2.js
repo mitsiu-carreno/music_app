@@ -68,12 +68,12 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.track, .album, .artist', function(){
-        console.log($(this));
-        var id=$(this).context.id;
+        var id=$(this).attr("id"),
+            type = $(this).attr("class");
         $.ajax({
-            url:api_spotify + "tracks/"+ id,
+            url:api_spotify + type + "s/"+ id,
             success: function(response){
-                console.log(response);
+                //console.log(response);
             }
         });
         /*          <------------------------------------Completar error en 74
