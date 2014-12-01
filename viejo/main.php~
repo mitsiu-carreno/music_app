@@ -17,7 +17,6 @@
 	<script type="text/javascript" src="query2.js"></script>
 </head>
 <body>
-    <!--
 <div class="container">
     
     <h1>Search for an Artist/Album/Track</h1>
@@ -29,7 +28,7 @@
 
 </div>
 
-<!--Template
+<!--Template-->
 <script id="results-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
     <div id="tracks_results">
@@ -91,7 +90,6 @@
                 </div>
             </div>
         {{/each}}
-        {{{add_tracks "+ Tracks" tracks.next}}}
     {{else}}
     <p>No se encontró ningún track :(</p>
     {{/if}}
@@ -116,7 +114,6 @@
                 </div>
             </div>
         {{/each}}
-        {{{add_artists "+ Artists" artists.next}}}
     {{else}}
         <p>No se encontró ningún artista :(</p>
     {{/if}}
@@ -135,7 +132,6 @@
             </div>
             {{{album_songs id}}}
         {{/each}}
-        {{{add_albums "+ Albums" albums.next}}}
     {{else}}
         <p>No se encontró ningún album :(</p>
     {{/if}}
@@ -217,17 +213,25 @@
                                 <input type="text" id="query" value="hans zimmer" class="form-control" />
                                 <input type="submit" id="search" class="btn btn-primary" value="Search" />
                             </form>
-                            <div id="track_results"></div>
+                            <div id="results"></div>
                         </div>
                     </li>
                     <li>
                         <div class="slide">
-                            <div id="artist_results"></div>
+                            <img class="icon" src="img/icons/heart.svg" alt="Heart Icon"/>
+                            <blockquote>
+                                <p>Never fear quarrels, but seek hazardous adventures.</p>
+                            </blockquote>
+                            <p>Alexandre Dumas</p>
                         </div>
                     </li>
                     <li>
                         <div class="slide">
-                            <div id="album_results"></div>
+                            <img class="icon" src="img/icons/letter.svg" alt="Letter Icon"/>
+                            <blockquote>
+                                <p>If you don't know where you are going, any road will get you there.</p>
+                            </blockquote>
+                            <p>Lewis Carroll</p>
                         </div>
                     </li>
                     <li>

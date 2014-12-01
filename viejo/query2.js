@@ -1,9 +1,10 @@
 $(document).ready(function(){
-    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/',
-        api_spotify = 'https://api.spotify.com/v1/',
-        setLimit = 4;
+    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
+    var api_spotify = 'https://api.spotify.com/v1/';
+    var setLimit = 4;
 
-    var artist_template_source = document.getElementById('artist-template').innerHTML,
+	var template_source = document.getElementById('results-template').innerHTML,
+        artist_template_source = document.getElementById('artist-template').innerHTML,
 
 		partial_track_source = document.getElementById('track-partial').innerHTML,
 		partial_artist_source = document.getElementById('artist-partial').innerHTML,
@@ -11,15 +12,15 @@ $(document).ready(function(){
         partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
         partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
-		//template = Handlebars.compile(template_source),
+		template = Handlebars.compile(template_source),
         artist_template = Handlebars.compile(artist_template_source),
 
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
         partial_top_tracks = Handlebars.compile(partial_top_source),
-        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist);
-		//resultsPlaceholder = document.getElementById('results');
+        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
+		resultsPlaceholder = document.getElementById('results');
 
 
 	Handlebars.registerPartial("track", partial_track);
@@ -47,10 +48,7 @@ $(document).ready(function(){
                 limit: setLimit
             },
             success: function (response){
-                //resultsPlaceholder.innerHTML = template(response);
-                $("#track_results").html(partial_track(response));
-                $("#artist_results").html(partial_artist(response));
-                $("#album_results").html(partial_album(response));
+                resultsPlaceholder.innerHTML = template(response);
             }
         });
     }
