@@ -207,4 +207,5 @@ $(document).ready(function(){
         //var tr = $("<tr/>").attr()
         //ver plat_web/u2/log/printer.js (11)
     });
+    
 });
