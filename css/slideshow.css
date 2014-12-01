@@ -91,7 +91,7 @@ body,
 }
 
 .slideshow ul li:nth-child(3) > svg {
-	fill: #E5B8AD;
+	fill: #F36A71;
 }
 
 .slideshow ul li:nth-child(4) > svg {
@@ -99,7 +99,7 @@ body,
 }
 
 .slideshow ul li:nth-child(6) > svg {
-	fill: #F36A71;
+	fill: #E5B8AD;
 }
 
 .slide {
