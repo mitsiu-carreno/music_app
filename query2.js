@@ -61,26 +61,40 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             success: function (response){
-            	$("#"+btn_id).removeAttr("path");
+            	//$("#"+btn_id).removeAttr("path");
             	switch (type){
             		case "tracks_results": 
             			$("#"+type).append(partial_track(response));
-            			$("#"+btn_id).attr("path", response.tracks.next);
+                        next_url(btn_id, url, response.tracks.next);
             			break; 
             		case "artists_results":
             			$("#"+type).append(partial_artist(response));
-            			$("#"+btn_id).attr("path", response.artists.next);
+                        next_url(btn_id, url, response.artists.next);
             			break;
             		case "albums_results":
             			$("#"+type).append(partial_album(response));
-            			$("#"+btn_id).attr("path", response.albums.next);
+                        next_url(btn_id, url, response.albums.next);
             			break;
+                    case "albumsByArtist":
+                        $("#"+type).append(partial_albumsByArtist(response));
+                        next_url(btn_id, url, response.next);
+                        break;
             		default:
             			console.log("Sh*t didn't work");
             	}
             }
         });
     }   
+
+    var next_url = function (btn_id, url, response){
+        if(response != null){
+            $("#"+btn_id).removeAttr("path");
+            $("#"+btn_id).attr("path", response);
+        }
+        else{
+            $("#"+btn_id).remove();
+        }
+    }
 
     $(document).on('click', '.track, .album', function(){
         var id=$(this).attr("id"),
@@ -110,21 +124,20 @@ $(document).ready(function(){
     });
 
     var searchByArtist = function(id){
-        $.ajax({
-            url: api_spotify + "artists/"+ id + "/top-tracks?country=MX",
-            success : function(response){
-                resultsPlaceholder.innerHTML = artist_template(response);
-                topTracks = response;
-                $("#top_tracks").html(partial_top_tracks(response));
-            }
-        });
+        
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
             success : function (response){
+                resultsPlaceholder.innerHTML = artist_template(response);
                 $("#albumsByArtist").html(partial_albumsByArtist(response));
             }
         });
-        
+        $.ajax({
+            url: api_spotify + "artists/"+ id + "/top-tracks?country=MX",
+            success : function(response){
+                $("#top_tracks").html(partial_top_tracks(response));
+            }
+        });
     }   
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
@@ -143,7 +156,7 @@ $(document).ready(function(){
     });
 
     Handlebars.registerHelper("add_albumsByArtist", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albumsByArtist', id: 'add_albumsByArtist'});
         return $('<div></div>').append(button).html();
     });
 });
