@@ -47,10 +47,12 @@
 
 <!--Template_Artist-->
 <script id="artist-template" type="text/x-handlebars-template">
+    {{{name_artist tracks.0.artists.0.name}}}
     <h1>Top Tracks</h1>
     <div id="top_tracks">
         {{> topTracks}}
     </div>
+    <br>
     <h1>Albums</h1>
     <div id="albumsByArtist">  
         {{> albums_byArtist}}
@@ -118,6 +120,7 @@
                     ALBUM_NAME:{{name}}
                 </div>
             </div>
+            {{{album_songs id}}}
         {{/each}}
     {{else}}
         <p>No se encontró ningún album :(</p>

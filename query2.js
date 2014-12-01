@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
     var api_spotify = 'https://api.spotify.com/v1/';
+    var setLimit = 4;
 
 	var template_source = document.getElementById('results-template').innerHTML,
         artist_template_source = document.getElementById('artist-template').innerHTML,
@@ -44,7 +45,7 @@ $(document).ready(function(){
             data:{
                 q: query,
                 type: 'track,artist,album',
-                limit: 4
+                limit: setLimit
             },
             success: function (response){
                 resultsPlaceholder.innerHTML = template(response);
@@ -96,7 +97,7 @@ $(document).ready(function(){
         }
     }
 
-    $(document).on('click', '.track, .album', function(){
+    $(document).on('click', '.track', function(){
         var id=$(this).attr("id"),
             type = $(this).attr("class");
         $.ajax({
@@ -109,7 +110,7 @@ $(document).ready(function(){
                     data: response,
                     
                     success: function(result){
-                        console.log(result);
+                        console.log(result);        //<----INCOMPETE
                     },
                     error: function (request, status, errorThrown){
                         console.log("Saving error:" + status, errorThrown);
@@ -127,18 +128,52 @@ $(document).ready(function(){
         
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
+            data:{
+                limit: setLimit
+            },
             success : function (response){
                 resultsPlaceholder.innerHTML = artist_template(response);
                 $("#albumsByArtist").html(partial_albumsByArtist(response));
             }
         });
         $.ajax({
-            url: api_spotify + "artists/"+ id + "/top-tracks?country=MX",
+            url: api_spotify + "artists/"+ id + "/top-tracks",
+            data:{
+                country :"MX",
+                limit: setLimit
+            },
             success : function(response){
+                
                 $("#top_tracks").html(partial_top_tracks(response));
             }
         });
+
     }   
+
+    $(document).on('click', '.album', function(){
+        searchByAlbum($(this).attr("id"));
+    });
+
+    var searchByAlbum = function(id){
+        $.ajax({
+            url: api_spotify + "albums/" + id,
+            success: function (response){
+                console.log(response);
+            }
+        });
+    }
+
+    var searchSongsByAlbum = function(id){
+        var result;
+        $.ajax({
+            url: api_spotify + "albums/"+id,
+            success: function (response){
+                result =response;
+                return result;
+            } 
+        });
+
+    }
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
@@ -158,5 +193,18 @@ $(document).ready(function(){
     Handlebars.registerHelper("add_albumsByArtist", function (text, url){
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albumsByArtist', id: 'add_albumsByArtist'});
         return $('<div></div>').append(button).html();
+    });
+
+    Handlebars.registerHelper("name_artist", function(name){
+        var text = $('<h1></h1>').text(name);
+        return $('<div></div>').append(text).html();
+    });
+
+    Handlebars.registerHelper("album_songs", function(id){
+        var result = searchSongsByAlbum(id);
+        console.log(result);
+        return $('<div></div>').append(result).html();
+        //var tr = $("<tr/>").attr()
+        //ver plat_web/u2/log/printer.js (11)
     });
 });
