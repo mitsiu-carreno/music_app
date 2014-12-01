@@ -211,7 +211,7 @@
             <div id="slideshow" class="slideshow">
                 <ul>
                     <li>
-                        <div class="slide">
+                        <div class="slide" style="overflow-x:auto">
                             <h1>Search for an Artist/Album/Track</h1>
                             <form id="search-form">
                                 <input type="text" id="query" value="hans zimmer" class="form-control" />
