@@ -12,7 +12,7 @@
 <div class="container">
     <h1>Search for an Artist/Album/Track</h1>
     <form id="search-form">
-        <input type="text" id="query" value="" class="form-control" />
+        <input type="text" id="query" value="hans zimmer" class="form-control" />
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
@@ -43,6 +43,18 @@
     <br>
     {{{add_albums "+ Albums" albums.next}}}
     <br>
+</script>
+
+<!--Template_Artist-->
+<script id="artist-template" type="text/x-handlebars-template">
+    <h1>Top Tracks</h1>
+    <div id="top_tracks">
+        {{> topTracks}}
+    </div>
+    <br>
+    {{{add_top_tracks "+ Top Tracks" next}}}
+    <h1>Albums</h1>
+    <p>Work in progress</p>
 </script>
 
 <!--Partials-->
@@ -89,7 +101,7 @@
             </div>
         {{/each}}
     {{else}}
-    <p>No se encontró ningún artista :(</p>
+        <p>No se encontró ningún artista :(</p>
     {{/if}}
 </script>
 
@@ -106,7 +118,30 @@
             </div>
         {{/each}}
     {{else}}
-    <p>No se encontró ningún album :(</p>
+        <p>No se encontró ningún album :(</p>
+    {{/if}}
+</script>
+
+<script id="top_tracks-partial" type="text/x-handlebars-template">
+    {{#if tracks}}
+        {{#each tracks}}
+            <div class="top_track" id="{{id}}" style="width:50%; float:left">
+                <div style="background-image:url({{album.images.0.url}}); float:left" class="cover"></div>
+                <div id="track_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    TRACK_NAME:{{name}}
+                    <br>
+                    ARTISTS:
+                        {{#each artists}}
+                            {{name}}<br>
+                        {{/each}}
+                    ALBUM:{{album.name}}
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>NO se encontró ningún track</p>
     {{/if}}
 </script>
 
