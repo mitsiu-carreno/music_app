@@ -112,13 +112,15 @@ $(document).ready(function(){
             url: api_spotify + "artists/"+ id + "/top-tracks?country=MX",
             success : function(response){
                 topTracks = response;
-            }
+            },
+
         });
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
             success : function (response){
-                albums = response;
-                console.log(topTracks + albums);
+                var result = [topTracks, response];
+                console.log(result);
+                //console.log(response);
             }
         });
         
