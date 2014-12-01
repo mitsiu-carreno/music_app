@@ -51,10 +51,12 @@
     <div id="top_tracks">
         {{> topTracks}}
     </div>
-    <br>
-    {{{add_top_tracks "+ Top Tracks" next}}}
     <h1>Albums</h1>
-    <p>Work in progress</p>
+    <div id="albumsByArtist">  
+        {{> albums_byArtist}}
+    </div>
+    <br>
+    {{{add_albumsByArtist "+ Albums" next}}}
 </script>
 
 <!--Partials-->
@@ -122,6 +124,23 @@
     {{/if}}
 </script>
 
+<script id="albums_byArtist-partial" type="text/x-handlebars-template">
+    {{#if items}}
+        {{#each items}}
+            <div class="album" id="{{id}}" style="width:50%; float:left">
+                <div style="background-image:url({{images.0.url}}); float:left" class="cover"></div>
+                <div id="album_info" style="float:left">
+                    ID:{{id}}
+                    <br>
+                    ALBUM_NAME:{{name}}
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No se encontró ningún album :(</p>
+    {{/if}}
+</script>
+
 <script id="top_tracks-partial" type="text/x-handlebars-template">
     {{#if tracks}}
         {{#each tracks}}
@@ -144,7 +163,6 @@
         <p>NO se encontró ningún track</p>
     {{/if}}
 </script>
-
 
 <style type="text/css">
 	body {

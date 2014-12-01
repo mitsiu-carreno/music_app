@@ -9,6 +9,7 @@ $(document).ready(function(){
 		partial_artist_source = document.getElementById('artist-partial').innerHTML,
 		partial_album_source = document.getElementById('album-partial').innerHTML,
         partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
+        partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
 		template = Handlebars.compile(template_source),
         artist_template = Handlebars.compile(artist_template_source),
@@ -17,6 +18,7 @@ $(document).ready(function(){
 		partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
         partial_top_tracks = Handlebars.compile(partial_top_source),
+        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
 		resultsPlaceholder = document.getElementById('results');
 
 
@@ -26,7 +28,9 @@ $(document).ready(function(){
 
 	Handlebars.registerPartial("album", partial_album);
 
-    Handlebars.registerPartial("topTracks", partial_top_tracks);
+    Handlebars.registerPartial("topTracks", partial_top_tracks),
+
+    Handlebars.registerPartial('albums_byArtist', partial_albumsByArtist),
 
     //Reaizar Busqueda
     document.getElementById('search-form').addEventListener('submit', function (e) {
@@ -106,21 +110,18 @@ $(document).ready(function(){
     });
 
     var searchByArtist = function(id){
-        var topTracks;
-        var albums;
         $.ajax({
             url: api_spotify + "artists/"+ id + "/top-tracks?country=MX",
             success : function(response){
+                resultsPlaceholder.innerHTML = artist_template(response);
                 topTracks = response;
-            },
-
+                $("#top_tracks").html(partial_top_tracks(response));
+            }
         });
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
             success : function (response){
-                var result = [topTracks, response];
-                console.log(result);
-                //console.log(response);
+                $("#albumsByArtist").html(partial_albumsByArtist(response));
             }
         });
         
@@ -141,7 +142,7 @@ $(document).ready(function(){
     	return $('<div></div>').append(button).html();
     });
 
-    Handlebars.registerHelper("add_top_tracks", function (text, url){
+    Handlebars.registerHelper("add_albumsByArtist", function (text, url){
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url});
         return $('<div></div>').append(button).html();
     });
