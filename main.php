@@ -28,6 +28,7 @@
                     <li><a href="#section-3">Albums</a></li>
                 </ul>
             </header>
+            <div id="player_area"></div>
             <div class="vs-wrapper">
                 <section id="section-1">
                     <div class="vs-content">
@@ -85,6 +86,10 @@
     <br>
     {{{add_albums "+ Albums" albums.next}}}
     <br>
+</script>
+
+<script id="player-template"type="text/x-handlebars-template">
+<p style="text-align:center"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
 </script>
 
 <!--Template_Artist

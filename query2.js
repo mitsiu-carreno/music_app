@@ -7,6 +7,7 @@ $(document).ready(function(){
     var artist_template_source = document.getElementById('artists-template').innerHTML,
         track_template_source = document.getElementById('tracks-template').innerHTML,
         album_template_source = document.getElementById('albums-template').innerHTML,
+        player_template_source = document.getElementById('player-template').innerHTML,
 
 
         partial_track_source = document.getElementById('track-partial').innerHTML,
@@ -19,6 +20,7 @@ $(document).ready(function(){
         artist_template = Handlebars.compile(artist_template_source),
         track_template = Handlebars.compile(track_template_source),
         album_template = Handlebars.compile(album_template_source),
+        player_template = Handlebars.compile(player_template_source),
 
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
@@ -27,7 +29,8 @@ $(document).ready(function(){
         partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
 		tracks_area = document.getElementById('tracks_area'),
         artists_area = document.getElementById('artists_area'),
-        albums_area = document.getElementById('albums_area');
+        albums_area = document.getElementById('albums_area'),
+        player_area = document.getElementById('player_area');
 
 
 
@@ -123,13 +126,14 @@ $(document).ready(function(){
         $.ajax({
             url:api_spotify + type + "s/"+ id,
             success: function(response){
-                
+                player_area.innerHTML =player_template(response);
                 $.ajax({
                     type: "POST",
                     url: global_url + "insert.php",
                     data: response,
                     
                     success: function(result){
+
                         console.log(result);        //<----INCOMPETE
                     },
                     error: function (request, status, errorThrown){
@@ -141,7 +145,8 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '.artist', function(){
-        searchByArtist($(this).attr("id"));
+        $("#artists_results").append('<div style="width:30px;height:30px;border:2px solid #666;"></div>');
+        //searchByArtist($(this).attr("id"));
     });
 
     var searchByArtist = function(id){
@@ -179,6 +184,7 @@ $(document).ready(function(){
             url: api_spotify + "albums/" + id,
             success: function (response){
                 console.log(response);
+                player_area.innerHTML =player_template(response);
             }
         });
     }
