@@ -945,6 +945,7 @@ figure.effect-sarah h2 {
 	position: relative;
 	overflow: hidden;
 	padding: 0.5em 0;
+	font-size: 23px;
 }
 
 figure.effect-sarah h2::after {

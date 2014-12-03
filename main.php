@@ -23,7 +23,7 @@
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
-    <div id="tracks_results" style="clear:both"></div>
+    <div id="tracks_results" style="clear:both"><h1>Tracks</h1></div>
     <div id="artists_results"style="clear:both"></div> 
     <div id="albums_results" style="clear:both"></div>
 
@@ -74,7 +74,6 @@
 
 <!--Partials-->
 <script id="track-template" type="text/x-handlebars-template">
-    <h1>Tracks</h1>
     {{#if tracks.items}}
         {{#each tracks.items}}
             <div class="grid">
@@ -86,7 +85,7 @@
                             <p>{{#each artists}}
                                 {{name}}<br>
                                 {{/each}} 
-                                with {{album.name}}</p>
+                                from {{album.name}}</p>
                            
                         </figcaption>     
                     </div>    
@@ -112,6 +111,7 @@
             </div>
             <figure>-->
         {{/each}}
+        {{{add_tracks "+ Tracks" tracks.next}}}
     {{else}}
     <p>No se encontró ningún track :(</p>
     {{/if}}
@@ -155,14 +155,16 @@
     {{/if}}
 </script>
 
-<script id="album-partial" type="text/x-handlebars-template">
+<script id="album-template" type="text/x-handlebars-template">
+    <h1>Albums</h1>
     {{#if albums.items}}
         {{#each albums.items}}
             <div class="grid">
-                <figure class="effect-sadie">
+                <figure class="effect-sarah">
                     <div class="album" id="{{id}}">
                         <img src="{{images.0.url}}" />
                         <figcaption>
+                            <h2>{{name}}<h2>
                         </figcaption>
                     </div>
                 </figure>
