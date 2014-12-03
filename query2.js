@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
     var api_spotify = 'https://api.spotify.com/v1/';
-    var setLimit = 8;
+    var setLimit = 6;
 
 	//var template_source = document.getElementById('results-template').innerHTML,
     var artist_template_source = document.getElementById('artists-template').innerHTML,

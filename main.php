@@ -1,6 +1,6 @@
 <html>
 <head>
-	<?php include 'connection.php' ?>
+	
     
     <meta charset="UTF-8">
         <link rel="shortcut icon" href="../favicon.ico">
@@ -9,12 +9,73 @@
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/set1Custom.css" />
         <!--<link rel="stylesheet" type="text/css" href="css/set2.css" />-->
+            <!--TEsting-->
+            <link rel="stylesheet" type="text/css" href="css/component.css" />
+            <!--fin-->
 
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="handlebars-v2.0.0.js"></script>
 	<script type="text/javascript" src="query2.js"></script>
+            <!--TEsting-->
+            <script src="js/modernizr.custom.js"></script>
+            <!--fin-->
 </head>
 <body>
+    <!--TEsting-->
+    <!--<?php include 'connection.php' ?>-->
+    <div id="vs-container" class="vs-container">
+            <div class="codrops-top clearfix">
+                <a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/SidebarTransitions/"><span>Previous Demo</span></a>
+                <span class="right"><a href="http://www.catipsum.com/">Text by Catipsum</a><a href="http://AllSilhouettes.com">Cats by All Silhouettes</a><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16382"><span>Back to the Codrops Article</span></a></span>
+            </div>
+            <header class="vs-header">
+                <h1>Search for an Artist/Album/Track</h1>
+                    <form id="search-form">
+                        <input type="text" id="query" value="hans zimmer" class="form-control" />
+                        <input type="submit" id="search" class="btn btn-primary" value="Search" />
+                    </form>
+
+                <!--<h1>Sliding Triple View Layout <span>with Visible Adjoining Sections</span></h1>-->
+                <ul class="vs-nav">
+                    <li><a href="#section-1">Tracks</a></li>
+                    <li><a href="#section-2">Artists</a></li>
+                    <li><a href="#section-3">Albums</a></li>
+                    
+                </ul>
+            </header>
+            <div class="vs-wrapper">
+                <section id="section-1">
+                    <div class="vs-content">
+                        <h3>"Maybe I'm too busy being <br>yours to fall for somebody new"<br>-Arctic Monkeys</h3>
+                        
+                            <div id="tracks_area" style="clear:both"></div>
+                        
+                    </div>
+                </section>
+                <section id="section-2">
+                    <div class="vs-content">
+                        <h3>"Lights will guide you home and <br>ignite your bones i will try to fix you" <br>-Coldplay</h3>
+                        
+                            <div id="artists_area"style="clear:both"></div>
+
+                    </div>
+                </section>
+                <section id="section-3">
+                    <div class="vs-content">
+                        <h3>"You sit there in your heartache <br>waiting on some beautiful boy to save <br>you from your old ways"<br>-The Killers</h3>
+                        
+                            <div id="albums_area" style="clear:both"></div>
+
+                    </div>
+                </section>
+            </div>
+        </div><!-- /vs-container -->
+        <script src="js/classie.js"></script>
+        <script src="js/hammer.min.js"></script>
+        <script src="js/main.js"></script>
+    <!--fin-->
+
+<!--
 <div class="container">
 
     <h1>Search for an Artist/Album/Track</h1>
@@ -23,9 +84,8 @@
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
-    <div id="tracks_area" style="clear:both"></div>
-    <div id="artists_area"style="clear:both"></div> 
-    <div id="albums_area" style="clear:both"></div>
+    
+    
 
 </div>
 
