@@ -1,5 +1,7 @@
 <?php
 
-	class track{
-		
+	class Track{
+		function __construct(){
+			echo "hello";
+		}
 	}

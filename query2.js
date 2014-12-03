@@ -145,11 +145,6 @@ $(document).ready(function(){
         });
     });
 
-    $(document).on('click', '.artist', function(){
-        $("#artists_results").append('<div style="width:30px;height:30px;border:2px solid #666;"></div>');
-        //searchByArtist($(this).attr("id"));
-    });
-
     var searchByArtist = function(id){
         
         $.ajax({
@@ -208,6 +203,27 @@ $(document).ready(function(){
         });
 
     }
+
+    //show info of artist
+     var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'
+     $(document).on('click', '.artist', function(){
+         if(artist_info != ''){
+            $(this).closest("figure").after(artist_info); 
+            artist_info='';
+         }
+         else{
+             //console.log($(this).next('figure'));
+             $(this).closest("figure").next('figure').remove(); 
+             artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
+         }
+         
+         //searchByArtist($(this).attr("id"));
+     });
+ 
+     $(document).on('click', '.album_info', function(){
+                                 //<--Incomplete Play album
+     });
+    //end-show info of artist
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
