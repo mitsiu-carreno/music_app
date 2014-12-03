@@ -122,7 +122,12 @@
 <script id="track-partial" type="text/x-handlebars-template">
     {{#if tracks.items}}
         {{#each tracks.items}}
-            
+            {{#moduloIf @index 0 0}}
+                <div id="cut">
+            {{/moduloIf}}
+            {{#moduloIf @index 0 3}}
+                <div id="cut">
+            {{/moduloIf}}
                 <figure class="effect-sadie">
                     <div class="track" id="{{id}}">
                         <img src="{{album.images.0.url}}" alt="img01"/>
@@ -136,7 +141,9 @@
                         </figcaption>     
                     </div>    
                 </figure>
-            
+            {{#moduloIf @index 1 3}}
+                </div>
+            {{/moduloIf}}
         {{/each}}
     {{else}}
     <p>No se encontró ningún track :(</p>

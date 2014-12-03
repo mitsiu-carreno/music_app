@@ -257,5 +257,11 @@ $(document).ready(function(){
         //var tr = $("<tr/>").attr()
         //ver plat_web/u2/log/printer.js (11)
     });
+
+    Handlebars.registerHelper("moduloIf", function(index_count, aux, mod, block){
+        if((parseInt(index_count)+aux)%(mod)===0){
+            return block.fn(this);
+        }
+    });
     
 });
