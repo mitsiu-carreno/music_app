@@ -4,13 +4,14 @@ $(document).ready(function(){
     var setLimit = 8;
 
 	//var template_source = document.getElementById('results-template').innerHTML,
-    var artist_template_source = document.getElementById('artist-template').innerHTML,
-        track_template_source = document.getElementById('track-template').innerHTML,
-        album_template_source = document.getElementById('album-template').innerHTML,
+    var artist_template_source = document.getElementById('artists-template').innerHTML,
+        track_template_source = document.getElementById('tracks-template').innerHTML,
+        album_template_source = document.getElementById('albums-template').innerHTML,
 
 
-		//partial_artist_source = document.getElementById('artist_partial').innerHTML,
-		//partial_album_source = document.getElementById('album-partial').innerHTML,
+        partial_track_source = document.getElementById('track-partial').innerHTML,
+		partial_artist_source = document.getElementById('artist-partial').innerHTML,
+		partial_album_source = document.getElementById('album-partial').innerHTML,
         partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
         partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
@@ -19,22 +20,22 @@ $(document).ready(function(){
         track_template = Handlebars.compile(track_template_source),
         album_template = Handlebars.compile(album_template_source),
 
-		//partial_track = Handlebars.compile(partial_track_source),
-		//partial_artist = Handlebars.compile(partial_artist_source),
-		//partial_album = Handlebars.compile(partial_album_source),
+		partial_track = Handlebars.compile(partial_track_source),
+		partial_artist = Handlebars.compile(partial_artist_source),
+		partial_album = Handlebars.compile(partial_album_source),
         partial_top_tracks = Handlebars.compile(partial_top_source),
         partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
-		search_tracks_results = document.getElementById('tracks_results'),
-        search_artists_results = document.getElementById('artists_results'),
-        search_album_results = document.getElementById('albums_results');
+		tracks_area = document.getElementById('tracks_area'),
+        artists_area = document.getElementById('artists_area'),
+        albums_area = document.getElementById('albums_area');
 
 
 
-	//Handlebars.registerPartial("track", partial_track);
+	Handlebars.registerPartial("track", partial_track);
 
-	//Handlebars.registerPartial("artist", partial_artist);
+	Handlebars.registerPartial("artist", partial_artist);
 
-	//Handlebars.registerPartial("album", partial_album);
+	Handlebars.registerPartial("album", partial_album);
 
     Handlebars.registerPartial("topTracks", partial_top_tracks),
 
@@ -55,9 +56,12 @@ $(document).ready(function(){
                 limit: setLimit
             },
             success: function (response){
-                search_artists_results.innerHTML = artist_template(response);
-                search_tracks_results.innerHTML = track_template(response);
-                search_album_results.innerHTML = album_template(response);
+                tracks_area.innerHTML = track_template(response);
+                artists_area.innerHTML = artist_template(response);
+                albums_area.innerHTML = album_template(response);
+                //artists_area.innerHTML = artist_template(response);
+                //tracks_area.innerHTML = track_template(response);
+                //albums_area.innerHTML = album_template(response);
                 
                 console.log($("#tracks_results"));
                 //$("#tracks_results").html = track_template(response);
@@ -79,7 +83,7 @@ $(document).ready(function(){
             	//$("#"+btn_id).removeAttr("path");
             	switch (type){
             		case "tracks_results": 
-            			$("#"+type).append(track_template(response));
+            			$("#"+type).append(partial_track(response));
                         next_url(btn_id, url, response.tracks.next);
             			break; 
             		case "artists_results":

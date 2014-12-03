@@ -23,14 +23,14 @@
         <input type="submit" id="search" class="btn btn-primary" value="Search" />
     </form>
     <div id="results"></div>
-    <div id="tracks_results" style="clear:both"><h1>Tracks</h1></div>
-    <div id="artists_results"style="clear:both"></div> 
-    <div id="albums_results" style="clear:both"></div>
+    <div id="tracks_area" style="clear:both"></div>
+    <div id="artists_area"style="clear:both"></div> 
+    <div id="albums_area" style="clear:both"></div>
 
 </div>
 
-<!--Template
-<script id="results-template" type="text/x-handlebars-template">
+<!--Template-->
+<script id="tracks-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
     <div id="tracks_results">
         {{> track}}
@@ -38,7 +38,8 @@
     <br>
     {{{add_tracks "+ Tracks" tracks.next}}}
     <br>
-
+</script>
+<script id="artists-template" type="text/x-handlebars-template">
     <h1>Artists</h1>
     <div id="artists_results">
         {{> artist}}
@@ -46,7 +47,8 @@
     <br>
     {{{add_artists "+ Artists" artists.next}}}
     <br>
-
+</script>
+<script id="albums-template" type="text/x-handlebars-template">
     <h1>Albums</h1>
     <div id="albums_results">
         {{> album}}
@@ -73,8 +75,7 @@
 </script>
 
 <!--Partials-->
-<script id="track-template" type="text/x-handlebars-template">
-    <h1>Tracks</h1>
+<script id="track-partial" type="text/x-handlebars-template">
     {{#if tracks.items}}
         {{#each tracks.items}}
             <div class="grid">
@@ -112,14 +113,12 @@
             </div>
             <figure>-->
         {{/each}}
-        {{{add_tracks "+ Tracks" tracks.next}}}
     {{else}}
     <p>No se encontró ningún track :(</p>
     {{/if}}
 </script>
 
-<script id="artist-template" type="text/x-handlebars-template">
-    <h1>Artists</h1>
+<script id="artist-partial" type="text/x-handlebars-template">
     {{#if artists.items}} 
         {{#each artists.items}}
             <div class="grid">
@@ -156,8 +155,7 @@
     {{/if}}
 </script>
 
-<script id="album-template" type="text/x-handlebars-template">
-    <h1>Albums</h1>
+<script id="album-partial" type="text/x-handlebars-template">
     {{#if albums.items}}
         {{#each albums.items}}
             <div class="grid">
@@ -254,6 +252,6 @@
     border: 5px solid #e45343;
 }
 </style>
-alexgarciadel@hotmail.com <--enviar proyecto telefono y correo
+
 </body>
 </html>
