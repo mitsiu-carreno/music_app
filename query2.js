@@ -105,6 +105,7 @@ $(document).ready(function(){
         });
     }   
 
+    //Actualizar url para más busquedas
     var next_url = function (btn_id, url, response){
         if(response != null){
             $("#"+btn_id).removeAttr("path");
