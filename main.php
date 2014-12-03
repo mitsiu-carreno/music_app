@@ -60,8 +60,12 @@
 <!--Template-->
 <script id="tracks-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
-    <div id="tracks_results">
-        {{> track}}
+    <div class="grid">
+        <div id="tracks_results">
+        
+            {{> track}}
+        
+        </div>
     </div>
     <br>
     {{{add_tracks "+ Tracks" tracks.next}}}
@@ -70,8 +74,11 @@
 
 <script id="artists-template" type="text/x-handlebars-template">
     <h1>Artists</h1>
-    <div id="artists_results">
-        {{> artist}}
+    <div class="grid">
+        <div id="artists_results">
+    
+            {{> artist}}
+        </div>
     </div>
     <br>
     {{{add_artists "+ Artists" artists.next}}}
@@ -80,8 +87,11 @@
 
 <script id="albums-template" type="text/x-handlebars-template">
     <h1>Albums</h1>
-    <div id="albums_results">
+    <div class="grid">
+        <div id="albums_results">
+    
         {{> album}}
+        </div>
     </div>
     <br>
     {{{add_albums "+ Albums" albums.next}}}
@@ -112,7 +122,7 @@
 <script id="track-partial" type="text/x-handlebars-template">
     {{#if tracks.items}}
         {{#each tracks.items}}
-            <div class="grid">
+            
                 <figure class="effect-sadie">
                     <div class="track" id="{{id}}">
                         <img src="{{album.images.0.url}}" alt="img01"/>
@@ -126,7 +136,7 @@
                         </figcaption>     
                     </div>    
                 </figure>
-            </div>
+            
         {{/each}}
     {{else}}
     <p>No se encontró ningún track :(</p>
@@ -136,7 +146,7 @@
 <script id="artist-partial" type="text/x-handlebars-template">
     {{#if artists.items}} 
         {{#each artists.items}}
-            <div class="grid">
+            
                 <figure class="effect-romeo">
                     <div class="artist" id="{{id}}">
                         <img src="{{#if images.0.url}}{{images.0.url}}
@@ -146,7 +156,7 @@
                         </figcaption>
                     </div>
                 </figure>
-            </div>
+            
         {{/each}}
     {{else}}
         <p>No se encontró ningún artista :(</p>
@@ -156,7 +166,7 @@
 <script id="album-partial" type="text/x-handlebars-template">
     {{#if albums.items}}
         {{#each albums.items}}
-            <div class="grid">
+            
                 <figure class="effect-sarah">
                     <div class="album" id="{{id}}">
                         <img src="{{images.0.url}}" />
@@ -165,7 +175,7 @@
                         </figcaption>
                     </div>
                 </figure>
-            </div>
+            
             {{{album_songs id}}}
         {{/each}}
     {{else}}
