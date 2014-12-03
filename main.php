@@ -122,10 +122,10 @@
     {{#if artists.items}} 
         {{#each artists.items}}
             <div class="grid">
-                <figure class="effect-sadie">
+                <figure class="effect-romeo">
                     <div class="artist" id="{{id}}">
                         <img src="{{#if images.0.url}}{{images.0.url}}
-                            {{else}}https://ssl.gstatic.com/accounts/ui/avatar_2x.png{{/if}}"/>
+                            {{else}}http://static2.businessinsider.com/image/4e1b276e49e2ae487d020000-480/spotify-horns.jpg{{/if}}"/>
                         <figcaption>
                             <h2>{{name}}</h2>
                         </figcaption>
