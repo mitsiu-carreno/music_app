@@ -144,9 +144,23 @@ $(document).ready(function(){
         });
     });
 
+    var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'
     $(document).on('click', '.artist', function(){
-        $("#artists_results").append('<div style="width:30px;height:30px;border:2px solid #666;"></div>');
+        if(artist_info != ''){
+           $(this).closest("figure").after(artist_info); 
+           artist_info='';
+        }
+        else{
+            //console.log($(this).next('figure'));
+            $(this).closest("figure").next('figure').remove(); 
+            artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
+        }
+        
         //searchByArtist($(this).attr("id"));
+    });
+
+    $(document).on('click', '.album_info', function(){
+                                //<--Incomplete Play album
     });
 
     var searchByArtist = function(id){
@@ -207,7 +221,7 @@ $(document).ready(function(){
     });
 
     Handlebars.registerHelper("add_artists", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists', style:'clear:both'});
         return $('<div></div>').append(button).html();
     });
 
