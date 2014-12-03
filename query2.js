@@ -143,7 +143,7 @@ $(document).ready(function(){
             }
         });
     });
-
+    //show info of artist
     var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'
     $(document).on('click', '.artist', function(){
         if(artist_info != ''){
@@ -162,6 +162,9 @@ $(document).ready(function(){
     $(document).on('click', '.album_info', function(){
                                 //<--Incomplete Play album
     });
+    //end-show info of artist
+
+
 
     var searchByArtist = function(id){
         
