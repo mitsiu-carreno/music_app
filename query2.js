@@ -1,30 +1,36 @@
 $(document).ready(function(){
-    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/',
-        api_spotify = 'https://api.spotify.com/v1/',
-        setLimit = 4;
+    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
+    var api_spotify = 'https://api.spotify.com/v1/';
+    var setLimit = 6;
 
+	//var template_source = document.getElementById('results-template').innerHTML,
     var artist_template_source = document.getElementById('artist-template').innerHTML,
+        track_template_source = document.getElementById('track-template').innerHTML,
 
-		partial_track_source = document.getElementById('track-partial').innerHTML,
-		partial_artist_source = document.getElementById('artist-partial').innerHTML,
+
+
+		//partial_artist_source = document.getElementById('artist_partial').innerHTML,
 		partial_album_source = document.getElementById('album-partial').innerHTML,
         partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
         partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
 		//template = Handlebars.compile(template_source),
         artist_template = Handlebars.compile(artist_template_source),
+        track_template = Handlebars.compile(track_template_source),
 
-		partial_track = Handlebars.compile(partial_track_source),
-		partial_artist = Handlebars.compile(partial_artist_source),
+		//partial_track = Handlebars.compile(partial_track_source),
+		//partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
         partial_top_tracks = Handlebars.compile(partial_top_source),
-        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist);
-		//resultsPlaceholder = document.getElementById('results');
+        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
+		search_tracks_results = document.getElementById('tracks_results'),
+        search_artists_results = document.getElementById('artists_results');
 
 
-	Handlebars.registerPartial("track", partial_track);
 
-	Handlebars.registerPartial("artist", partial_artist);
+	//Handlebars.registerPartial("track", partial_track);
+
+	//Handlebars.registerPartial("artist", partial_artist);
 
 	Handlebars.registerPartial("album", partial_album);
 
@@ -47,10 +53,13 @@ $(document).ready(function(){
                 limit: setLimit
             },
             success: function (response){
-                //resultsPlaceholder.innerHTML = template(response);
-                $("#track_results").html(partial_track(response));
-                $("#artist_results").html(partial_artist(response));
-                $("#album_results").html(partial_album(response));
+                search_artists_results.innerHTML = artist_template(response);
+                search_tracks_results.innerHTML = track_template(response);
+                
+                console.log($("#tracks_results"));
+                //$("#tracks_results").html = track_template(response);
+                //$("#artists_results").html = partial_artist(response);
+                //$("#albums_results").html = partial_album(response);
             }
         });
     }
@@ -64,19 +73,23 @@ $(document).ready(function(){
         $.ajax({
             url: url,
             success: function (response){
-            	$("#"+btn_id).remove();
+            	//$("#"+btn_id).removeAttr("path");
             	switch (type){
-            		case "track_results": 
+            		case "tracks_results": 
             			$("#"+type).append(partial_track(response));
+                        next_url(btn_id, url, response.tracks.next);
             			break; 
-            		case "artist_results":
+            		case "artists_results":
             			$("#"+type).append(partial_artist(response));
+                        next_url(btn_id, url, response.artists.next);
             			break;
-            		case "album_results":
+            		case "albums_results":
             			$("#"+type).append(partial_album(response));
+                        next_url(btn_id, url, response.albums.next);
             			break;
                     case "albumsByArtist":
                         $("#"+type).append(partial_albumsByArtist(response));
+                        next_url(btn_id, url, response.next);
                         break;
             		default:
             			console.log("Sh*t didn't work");
@@ -85,7 +98,18 @@ $(document).ready(function(){
         });
     }   
 
-    $(document).on('click', '.track', function(){
+    var next_url = function (btn_id, url, response){
+        if(response != null){
+            $("#"+btn_id).removeAttr("path");
+            $("#"+btn_id).attr("path", response);
+        }
+        else{
+            $("#"+btn_id).remove();
+        }
+    }
+
+    $(document).on('click', '.track', function(e){
+        e.preventDefault();
         var id=$(this).attr("id"),
             type = $(this).attr("class");
         $.ajax({
@@ -164,17 +188,17 @@ $(document).ready(function(){
     }
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'track_results', id:'add_tracks'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_artists", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artist_results', id:'add_artists'});
+        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_albums", function (text, url){
-    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'album_results', id:'add_albums'});
+    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results', id:'add_albums'});
     	return $('<div></div>').append(button).html();
     });
 

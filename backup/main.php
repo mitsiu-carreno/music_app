@@ -3,6 +3,11 @@
 	<?php include 'connection.php' ?>
     
     <meta charset="UTF-8">
+        <link rel="shortcut icon" href="../favicon.ico">
+        <!--<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>-->
+        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/set1.css" />
 
 	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="handlebars-v2.0.0.js"></script>
@@ -10,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    
+
     <h1>Search for an Artist/Album/Track</h1>
     <form id="search-form">
         <input type="text" id="query" value="hans zimmer" class="form-control" />
@@ -67,9 +72,24 @@
 <script id="track-partial" type="text/x-handlebars-template">
     {{#if tracks.items}}
         {{#each tracks.items}}
+            <div class="grid">
+                <figure class="effect-oscar">
+                    <div class="track" id="{{id}}">
+                        <img src="{{album.images.0.url}}" alt="img01"/>
+                        <figcaption>
+                            <h2>Nice <span>Lily</span></h2>
+                            <p>Lily likes to play with crayons and pencils</p>
+                            <a href="#">View more</a>
+                        </figcaption>     
+                    </div>    
+                </figure>
+            </div>
+        <!--
+        <figure class="effect-lily">
             <div class="track" id="{{id}}" style="width:50%; float:left">
-                <div style="background-image:url({{album.images.0.url}}); float:left" class="cover"></div>    
-                <div id="track_info" style="float:left">
+                <div style="background-image:url({{album.images.0.url}})" class="cover"></div>    
+                <figcaption>
+                    <div id="track_info">
                     ID:{{id}}
                     <br>
                     TRACK_NAME:{{name}}
@@ -79,8 +99,10 @@
                             {{name}}<br>
                         {{/each}}
                     ALBUM:{{album.name}}
-                </div>
+                    </div>
+                </figcaption>
             </div>
+            <figure>-->
         {{/each}}
     {{else}}
     <p>No se encontró ningún track :(</p>
@@ -171,7 +193,10 @@
 
 <style type="text/css">
 	body {
+        color:white;
     padding: 20px;
+    background: #333;
+    //background: #2f3238;
 }
 
 #search-form, .form-control {

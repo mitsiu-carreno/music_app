@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
     var api_spotify = 'https://api.spotify.com/v1/';
-    var setLimit = 4;
+    var setLimit = 6;
 
 	var template_source = document.getElementById('results-template').innerHTML,
         artist_template_source = document.getElementById('artist-template').innerHTML,
@@ -97,7 +97,8 @@ $(document).ready(function(){
         }
     }
 
-    $(document).on('click', '.track', function(){
+    $(document).on('click', '.track', function(e){
+        e.preventDefault();
         var id=$(this).attr("id"),
             type = $(this).attr("class");
         $.ajax({
