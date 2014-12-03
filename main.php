@@ -74,6 +74,7 @@
 
 <!--Partials-->
 <script id="track-template" type="text/x-handlebars-template">
+    <h1>Tracks</h1>
     {{#if tracks.items}}
         {{#each tracks.items}}
             <div class="grid">
@@ -85,7 +86,7 @@
                             <p>{{#each artists}}
                                 {{name}}<br>
                                 {{/each}} 
-                                from {{album.name}}</p>
+                                with {{album.name}}</p>
                            
                         </figcaption>     
                     </div>    
