@@ -208,12 +208,12 @@ $(document).ready(function(){
      var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'
      $(document).on('click', '.artist', function(){
          if(artist_info != ''){
-            $(this).closest("figure").after(artist_info); 
+            $(this).parent().closest("div").after(artist_info); 
             artist_info='';
          }
          else{
              //console.log($(this).next('figure'));
-             $(this).closest("figure").next('figure').remove(); 
+             $(this).parent().closest("div").next('figure').remove(); 
              artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
          }
          
