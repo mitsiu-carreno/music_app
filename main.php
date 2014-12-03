@@ -153,7 +153,12 @@
 <script id="artist-partial" type="text/x-handlebars-template">
     {{#if artists.items}} 
         {{#each artists.items}}
-            
+            {{#moduloIf @index 0 0}}
+                <div id="cut">
+            {{/moduloIf}}
+            {{#moduloIf @index 0 3}}
+                <div id="cut">
+            {{/moduloIf}}
                 <figure class="effect-romeo">
                     <div class="artist" id="{{id}}">
                         <img src="{{#if images.0.url}}{{images.0.url}}
@@ -163,7 +168,9 @@
                         </figcaption>
                     </div>
                 </figure>
-            
+            {{#moduloIf @index 1 3}}
+                </div>
+            {{/moduloIf}}
         {{/each}}
     {{else}}
         <p>No se encontró ningún artista :(</p>
@@ -173,7 +180,12 @@
 <script id="album-partial" type="text/x-handlebars-template">
     {{#if albums.items}}
         {{#each albums.items}}
-            
+            {{#moduloIf @index 0 0}}
+                <div id="cut">
+            {{/moduloIf}}
+            {{#moduloIf @index 0 3}}
+                <div id="cut">
+            {{/moduloIf}}
                 <figure class="effect-sarah">
                     <div class="album" id="{{id}}">
                         <img src="{{images.0.url}}" />
@@ -183,7 +195,11 @@
                     </div>
                 </figure>
             
-            {{{album_songs id}}}
+                {{{album_songs id}}}
+                
+            {{#moduloIf @index 1 3}}
+                </div>
+            {{/moduloIf}}
         {{/each}}
     {{else}}
         <p>No se encontró ningún album :(</p>
