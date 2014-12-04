@@ -104,7 +104,7 @@
 
 <!--Template_Artist-->
 <script id="artist_info-template" type="text/x-handlebars-template">
-    <figure style="width:900px; max-width:900px" class="album_info" id="{{tracks}}">
+    <figure style="width:900px; max-width:900px" class="artist_info" id="{{tracks.0.artists.0.id}}">
         {{{name_artist tracks.0.artists.0.name}}}
         <h1>Top Tracks</h1>
         <div id="top_tracks">
@@ -118,6 +118,17 @@
         <br>
         {{{add_albumsByArtist "+ Albums" next}}}
     <figure>
+</script>
+
+<script id="album_info-template" type="text/x-handlebars-template">
+    <figure style="width:900px; max-width:900px" class="album_info" id="{{id}}">
+        <h1>{{name}}</h1>
+        <br>by {{#each artists}}{{name}}<br>{{/each}}
+        Tracks:
+        {{#each tracks.items}}
+            {{track_number}}-{{name}}
+        {{/each}}
+    </figure>
 </script>
 
 <!--Partials-->
@@ -196,9 +207,6 @@
                         </figcaption>
                     </div>
                 </figure>
-            
-                {{{album_songs id}}}
-                
             {{#moduloIf @index 1 3}}
                 </div>
             {{/moduloIf}}

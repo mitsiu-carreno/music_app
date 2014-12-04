@@ -1,14 +1,15 @@
-$(document).ready(function(){
     var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
     var api_spotify = 'https://api.spotify.com/v1/';
     var setLimit = 6;
 
-	//var template_source = document.getElementById('results-template').innerHTML,
+$(document).ready(function(){
+
     var artist_template_source = document.getElementById('artists-template').innerHTML,
         track_template_source = document.getElementById('tracks-template').innerHTML,
         album_template_source = document.getElementById('albums-template').innerHTML,
         player_template_source = document.getElementById('player-template').innerHTML,
         artist_info_template_source = document.getElementById('artist_info-template').innerHTML,
+        album_info_template_source = document.getElementById('album_info-template').innerHTML,
 
 
         partial_track_source = document.getElementById('track-partial').innerHTML,
@@ -17,18 +18,19 @@ $(document).ready(function(){
         partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
         partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
-		//template = Handlebars.compile(template_source),
         artist_template = Handlebars.compile(artist_template_source),
         track_template = Handlebars.compile(track_template_source),
         album_template = Handlebars.compile(album_template_source),
         player_template = Handlebars.compile(player_template_source),
         artist_info_template = Handlebars.compile(artist_info_template_source),
+        album_info_template = Handlebars.compile(album_info_template_source),
 
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
         partial_top_tracks = Handlebars.compile(partial_top_source),
         partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
+
 		tracks_area = document.getElementById('tracks_area'),
         artists_area = document.getElementById('artists_area'),
         albums_area = document.getElementById('albums_area'),
@@ -46,6 +48,7 @@ $(document).ready(function(){
 
     Handlebars.registerPartial('albums_byArtist', partial_albumsByArtist),
 
+    /////////////////////////////////////////----------GENERAL----------/////////////////////////////////////////
     //Reaizar Busqueda
     document.getElementById('search-form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -64,14 +67,6 @@ $(document).ready(function(){
                 tracks_area.innerHTML = track_template(response);
                 artists_area.innerHTML = artist_template(response);
                 albums_area.innerHTML = album_template(response);
-                //artists_area.innerHTML = artist_template(response);
-                //tracks_area.innerHTML = track_template(response);
-                //albums_area.innerHTML = album_template(response);
-                
-                console.log($("#tracks_results"));
-                //$("#tracks_results").html = track_template(response);
-                //$("#artists_results").html = partial_artist(response);
-                //$("#albums_results").html = partial_album(response);
             }
         });
     }
@@ -121,15 +116,23 @@ $(document).ready(function(){
         }
     }
 
-    $(document).on('click', '.track', function(e){
+    //Animación para auto scroll al player
+    var go_to_player = function(response){
+        player_area.innerHTML =player_template(response);
+        $('html, body').animate({     
+            scrollTop: $("#player_area").offset().top -200
+        }, 500);
+    }
+    /////////////////////////////////////////----------TRACKS----------/////////////////////////////////////////
+
+    $(document).on('click', '.track', function(e){              //01010100101010 OPTIMIZAR con albums (y artistas??)
         e.preventDefault();
         var id=$(this).attr("id"),
             type = $(this).attr("class");
         $.ajax({
             url:api_spotify + type + "s/"+ id,
             success: function(response){
-                player_area.innerHTML =player_template(response);
-                go_to_player();
+                go_to_player(response);
                 $.ajax({
                     type: "POST",
                     url: global_url + "insert.php",
@@ -147,6 +150,7 @@ $(document).ready(function(){
         });
     });
 
+    /////////////////////////////////////////----------ALBUMS----------/////////////////////////////////////////
     $(document).on('click', '.album', function(){
         searchByAlbum($(this).attr("id"));
     });
@@ -156,18 +160,12 @@ $(document).ready(function(){
             url: api_spotify + "albums/" + id,
             success: function (response){
                 console.log(response);
-                player_area.innerHTML =player_template(response);
-                go_to_player();
+                go_to_player(response);
             }
         });
     }
 
-    var go_to_player = function(){
-        $('html, body').animate({     //Animación para auto scroll hasta el boton
-            scrollTop: $("#player_area").offset().top -200
-        }, 500);
-    }
-
+    /*  VERIFICAR USO
     var searchSongsByAlbum = function(id){
         var result;
         $.ajax({
@@ -179,7 +177,9 @@ $(document).ready(function(){
         });
 
     }
+    */
 
+    /////////////////////////////////////////----------ARTISTS----------/////////////////////////////////////////
     //show info of artist
      /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
@@ -192,12 +192,12 @@ $(document).ready(function(){
 
      var destroy_artist_info = function(id){
         var resume = true;
-        if($(".album_info").length > 0){
-            console.log($(".album_info").attr("id"));
-            if($(".album_info").attr("id")==id){
+        if($(".artist_info").length > 0){
+            console.log($(".artist_info").attr("id"));
+            if($(".artist_info").attr("id")==id){
                 resume = false;
             }
-            $(".album_info").remove();
+            $(".artist_info").remove();
         }
         return resume;
     }
@@ -240,9 +240,11 @@ $(document).ready(function(){
     }   
  
      $(document).on('click', '.album_info', function(){
-                                 //<--Incomplete Play album
+
      });
     //end-show info of artist
+
+    /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
         var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
@@ -267,14 +269,6 @@ $(document).ready(function(){
     Handlebars.registerHelper("name_artist", function(name){
         var text = $('<h1></h1>').text(name);
         return $('<div></div>').append(text).html();
-    });
-
-    Handlebars.registerHelper("album_songs", function(id){
-        var result = searchSongsByAlbum(id);
-        console.log(result);
-        return $('<div></div>').append(result).html();
-        //var tr = $("<tr/>").attr()
-        //ver plat_web/u2/log/printer.js (11)
     });
 
     Handlebars.registerHelper("moduloIf", function(index_count, aux, mod, block){
