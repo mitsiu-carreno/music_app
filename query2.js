@@ -183,6 +183,10 @@ $(document).ready(function(){
         });
     }
 
+    $(document).on('click', '.album_info', function(){
+        console.log("eureka");
+    });
+
     /*  VERIFICAR USO
     var searchSongsByAlbum = function(id){
         var result;
@@ -208,19 +212,6 @@ $(document).ready(function(){
         }
      });
      
-     /*
-     var destroy_artist_info = function(id){
-        var resume = true;
-        if($(".artist_info").length > 0){
-            console.log($(".artist_info").attr("id"));
-            if($(".artist_info").attr("id")==id){
-                resume = false;
-            }
-            $(".artist_info").remove();
-        }
-        return resume;
-    }
-    */
     var searchByArtist = function(id, el){
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
