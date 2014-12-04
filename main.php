@@ -22,13 +22,13 @@
                         <input type="text" id="query" value="hans zimmer" class="form-control" />
                         <input type="submit" id="search" class="btn btn-primary" value="Search" />
                     </form>
+                    <div id="player_area"></div>
                 <ul class="vs-nav">
                     <li><a href="#section-1">Tracks</a></li>
                     <li><a href="#section-2">Artists</a></li>
                     <li><a href="#section-3">Albums</a></li>
                 </ul>
             </header>
-            <div id="player_area"></div>
             <div class="vs-wrapper">
                 <section id="section-1">
                     <div class="vs-content">
@@ -102,20 +102,22 @@
 <p style="text-align:center"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
 </script>
 
-<!--Template_Artist
-<script id="artist-template" type="text/x-handlebars-template">
-    {{{name_artist tracks.0.artists.0.name}}}
-    <h1>Top Tracks</h1>
-    <div id="top_tracks">
-        {{> topTracks}}
-    </div>
-    <br>
-    <h1>Albums</h1>
-    <div id="albumsByArtist">  
-        {{> albums_byArtist}}
-    </div>
-    <br>
-    {{{add_albumsByArtist "+ Albums" next}}}
+<!--Template_Artist-->
+<script id="artist_info-template" type="text/x-handlebars-template">
+    <figure style="width:900px; max-width:900px" class="album_info" id="{{tracks}}">
+        {{{name_artist tracks.0.artists.0.name}}}
+        <h1>Top Tracks</h1>
+        <div id="top_tracks">
+            {{> topTracks}}
+        </div>
+        <br>
+        <h1>Albums</h1>
+        <div id="albumsByArtist">  
+            {{> albums_byArtist}}
+        </div>
+        <br>
+        {{{add_albumsByArtist "+ Albums" next}}}
+    <figure>
 </script>
 
 <!--Partials-->

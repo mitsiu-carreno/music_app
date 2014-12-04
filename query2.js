@@ -8,6 +8,7 @@ $(document).ready(function(){
         track_template_source = document.getElementById('tracks-template').innerHTML,
         album_template_source = document.getElementById('albums-template').innerHTML,
         player_template_source = document.getElementById('player-template').innerHTML,
+        artist_info_template_source = document.getElementById('artist_info-template').innerHTML,
 
 
         partial_track_source = document.getElementById('track-partial').innerHTML,
@@ -21,6 +22,7 @@ $(document).ready(function(){
         track_template = Handlebars.compile(track_template_source),
         album_template = Handlebars.compile(album_template_source),
         player_template = Handlebars.compile(player_template_source),
+        artist_info_template = Handlebars.compile(artist_info_template_source),
 
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
@@ -108,7 +110,7 @@ $(document).ready(function(){
         });
     }   
 
-    //Actualizar url para más busquedas
+    //Actualiza url de search_more_btn para más busquedas
     var next_url = function (btn_id, url, response){
         if(response != null){
             $("#"+btn_id).removeAttr("path");
@@ -145,32 +147,6 @@ $(document).ready(function(){
         });
     });
 
-    var searchByArtist = function(id){
-        
-        $.ajax({
-            url: api_spotify + "artists/" + id + "/albums",
-            data:{
-                limit: setLimit
-            },
-            success : function (response){
-                resultsPlaceholder.innerHTML = artist_template(response);
-                $("#albumsByArtist").html(partial_albumsByArtist(response));
-            }
-        });
-        $.ajax({
-            url: api_spotify + "artists/"+ id + "/top-tracks",
-            data:{
-                country :"MX",
-                limit: setLimit
-            },
-            success : function(response){
-                
-                $("#top_tracks").html(partial_top_tracks(response));
-            }
-        });
-
-    }   
-
     $(document).on('click', '.album', function(){
         searchByAlbum($(this).attr("id"));
     });
@@ -205,20 +181,63 @@ $(document).ready(function(){
     }
 
     //show info of artist
-     var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'
+     /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
-         if(artist_info != ''){
-            $(this).parent().closest("div").after(artist_info); 
-            artist_info='';
+        var resume = destroy_artist_info($(this).attr("id"));
+        console.log("resume" + resume);
+        if(resume){
+            searchByArtist($(this).attr("id"), $(this));
+        }
+     });
+
+     var destroy_artist_info = function(id){
+        var resume = true;
+        if($(".album_info").length > 0){
+            console.log($(".album_info").attr("id"));
+            if($(".album_info").attr("id")==id){
+                resume = false;
+            }
+            $(".album_info").remove();
+        }
+        return resume;
+    }
+
+    var searchByArtist = function(id, el){
+        $.ajax({
+            url: api_spotify + "artists/" + id + "/albums",
+            data:{
+                limit: setLimit
+            },
+            success : function (response){
+                el.parent().closest("div").after(artist_info_template(response));
+                //resultsPlaceholder.innerHTML = artist_template(response);
+                //$("#albumsByArtist").html(partial_albumsByArtist(response));
+            }
+        });
+        /*
+        $.ajax({
+            url: api_spotify + "artists/"+ id + "/top-tracks",
+            data:{
+                country :"MX",
+                limit: setLimit
+            },
+            success : function(response){
+                
+                $("#top_tracks").html(partial_top_tracks(response));
+            }
+        });
+        /*
+        if(artist_info_template != ''){
+            $(this).parent().closest("div").after(artist_info_template(response)); 
+            artist_info_template='';
          }
          else{
              //console.log($(this).next('figure'));
              $(this).parent().closest("div").next('figure').remove(); 
              artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
          }
-         
-         //searchByArtist($(this).attr("id"));
-     });
+         */
+    }   
  
      $(document).on('click', '.album_info', function(){
                                  //<--Incomplete Play album
