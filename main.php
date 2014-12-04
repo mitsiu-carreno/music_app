@@ -123,8 +123,9 @@
 <script id="album_info-template" type="text/x-handlebars-template">
     <figure class="album_info div_info" id="{{id}}">
         <h1>{{name}}</h1>
-        <br>by {{#each artists}}{{name}}<br>{{/each}}<br>
-        Tracks:<br>
+        <br>by {{#each artists}}{{name}}<br>{{/each}}
+        <h4 style="color:#84bd00">Click to listen</h4>
+        Tracks: <br>
         {{#each tracks.items}}
             {{track_number}}-{{name}}<br>
         {{/each}}
