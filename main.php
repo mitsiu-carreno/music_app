@@ -104,7 +104,7 @@
 
 <!--Template_Artist-->
 <script id="artist_info-template" type="text/x-handlebars-template">
-    <figure style="width:900px; max-width:900px" class="artist_info" id="{{tracks.0.artists.0.id}}">
+    <figure class="artist_info div_info" id="{{tracks.0.artists.0.id}}">
         {{{name_artist tracks.0.artists.0.name}}}
         <h1>Top Tracks</h1>
         <div id="top_tracks">
@@ -121,10 +121,10 @@
 </script>
 
 <script id="album_info-template" type="text/x-handlebars-template">
-    <figure style="width:900px; max-width:900px" class="album_info" id="{{id}}">
+    <figure class="album_info div_info" id="{{id}}">
         <h1>{{name}}</h1>
-        <br>by {{#each artists}}{{name}}<br>{{/each}}
-        Tracks:
+        <br>by {{#each artists}}{{name}}<br>{{/each}}<br>
+        Tracks:<br>
         {{#each tracks.items}}
             {{track_number}}-{{name}}<br>
         {{/each}}
@@ -281,6 +281,14 @@
 
 .cover.playing {
     border: 5px solid #e45343;
+}
+
+.div_info{
+    width:900px !important; 
+    max-width:900px !important; 
+    border:3px solid white; 
+    overflow-y:auto !important; 
+    display:none;
 }
 </style>
 

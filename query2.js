@@ -130,7 +130,10 @@ $(document).ready(function(){
             if($("."+div_class).attr("id")==id){
                 resume = false;
             }
-            $("."+div_class).remove();
+            $("."+div_class).fadeOut("fast", function(){
+                $(this).remove();
+            });
+            //$("."+div_class).remove();
         }
         return resume;
     }
@@ -176,15 +179,16 @@ $(document).ready(function(){
                 limit: setLimit
             },
             success: function (response){
+                //el.append('<div class="arrow-up" style="width:0; height:0px; border-left:15px solid transparent; border-right:15px solid transparent; border-bottom: 15px solid white; position:relative;"></div>')
                 el.parent().closest("div").after(album_info_template(response));
-                //console.log(response);
-                //go_to_player(response);
+                $(".album_info").fadeIn('slow');
             }
         });
     }
 
     $(document).on('click', '.album_info', function(){
-        console.log("eureka");
+        var uri = {"uri": "spotify:album:" + $(this).attr("id")}
+        go_to_player(uri);
     });
 
     /*  VERIFICAR USO
@@ -248,11 +252,6 @@ $(document).ready(function(){
          }
          */
     }   
- 
-     $(document).on('click', '.album_info', function(){
-
-     });
-    //end-show info of artist
 
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
