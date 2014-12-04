@@ -123,6 +123,17 @@ $(document).ready(function(){
             scrollTop: $("#player_area").offset().top -200
         }, 500);
     }
+
+    var destroy_div_info = function (id, div_class){
+        var resume = true;
+        if($("."+div_class).length > 0){
+            if($("."+div_class).attr("id")==id){
+                resume = false;
+            }
+            $("."+div_class).remove();
+        }
+        return resume;
+    }
     /////////////////////////////////////////----------TRACKS----------/////////////////////////////////////////
 
     $(document).on('click', '.track', function(e){              //01010100101010 OPTIMIZAR con albums (y artistas??)
@@ -152,15 +163,22 @@ $(document).ready(function(){
 
     /////////////////////////////////////////----------ALBUMS----------/////////////////////////////////////////
     $(document).on('click', '.album', function(){
-        searchByAlbum($(this).attr("id"));
+        var resume = destroy_div_info($(this).attr('id'), "album_info");
+        if(resume){
+            searchByAlbum($(this).attr("id"), $(this));
+        }
     });
 
-    var searchByAlbum = function(id){
+    var searchByAlbum = function(id, el){
         $.ajax({
             url: api_spotify + "albums/" + id,
+            data:{
+                limit: setLimit
+            },
             success: function (response){
-                console.log(response);
-                go_to_player(response);
+                el.parent().closest("div").after(album_info_template(response));
+                //console.log(response);
+                //go_to_player(response);
             }
         });
     }
@@ -183,13 +201,14 @@ $(document).ready(function(){
     //show info of artist
      /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
-        var resume = destroy_artist_info($(this).attr("id"));
+        var resume = destroy_div_info($(this).attr("id"), "artist_info");
         console.log("resume" + resume);
         if(resume){
             searchByArtist($(this).attr("id"), $(this));
         }
      });
-
+     
+     /*
      var destroy_artist_info = function(id){
         var resume = true;
         if($(".artist_info").length > 0){
@@ -201,7 +220,7 @@ $(document).ready(function(){
         }
         return resume;
     }
-
+    */
     var searchByArtist = function(id, el){
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",

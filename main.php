@@ -126,7 +126,7 @@
         <br>by {{#each artists}}{{name}}<br>{{/each}}
         Tracks:
         {{#each tracks.items}}
-            {{track_number}}-{{name}}
+            {{track_number}}-{{name}}<br>
         {{/each}}
     </figure>
 </script>
