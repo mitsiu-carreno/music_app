@@ -241,14 +241,17 @@ $(document).ready(function(){
     });
 
     var seachAlbumTracksByArtist= function(albums){
-        console.log(albums);
+        //console.log(albums);
+        var album;
         jQuery.each(albums.items, function(index, value) {        //PARA CADA ALBUM
+            album = value.name;
             $.ajax({
                 url: value.href,
                 success: function (canciones){
                     jQuery.each(canciones.tracks.items, function(index2, value2){  //PARA CADA TRACK
-                        
+                        canciones.track=value2.name;
                     });
+                    console.log(canciones);
                 }
             });
         });
