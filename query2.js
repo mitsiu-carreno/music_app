@@ -240,11 +240,19 @@ $(document).ready(function(){
         go_to_player(uri);
     });
 
-    var seachAlbumTracksByArtist= function(response){
-        jQuery.each(response.items, function(index, value) {
-            console.log(value.uri);
+    var seachAlbumTracksByArtist= function(albums){
+        console.log(albums);
+        jQuery.each(albums.items, function(index, value) {        //PARA CADA ALBUM
+            $.ajax({
+                url: value.href,
+                success: function (canciones){
+                    jQuery.each(canciones.tracks.items, function(index2, value2){  //PARA CADA TRACK
+                        
+                    });
+                }
+            });
         });
-        return response;
+        return albums;
     }
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
