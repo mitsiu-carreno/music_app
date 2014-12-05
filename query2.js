@@ -216,7 +216,7 @@ $(document).ready(function(){
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
             data:{
-                limit: setLimit
+                limit: setLimit/2
             },
             success : function (response){
                 //var result = JSON.parse(response);
@@ -226,6 +226,7 @@ $(document).ready(function(){
                 //console.log(response);
                 el.parent().closest("div").after(artist_info_template(response));
                 $(".artist_info").fadeIn('slow');
+                //$(".artist_info").append(album_template(response));
                 //resultsPlaceholder.innerHTML = artist_template(response);
                 //$("#albumsByArtist").html(partial_albumsByArtist(response));
             }
@@ -263,22 +264,22 @@ $(document).ready(function(){
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
+        var button = $('<spotify_button></spotify_button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'tracks_results', id:'add_tracks'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_artists", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists'});
+        var button = $('<spotify_button></spotify_button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'artists_results', id:'add_artists'});
         return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_albums", function (text, url){
-    	var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results', id:'add_albums'});
+    	var button = $('<spotify_button></spotify_button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albums_results', id:'add_albums'});
     	return $('<div></div>').append(button).html();
     });
 
     Handlebars.registerHelper("add_albumsByArtist", function (text, url){
-        var button = $('<button></button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albumsByArtist', id: 'add_albumsByArtist'});
+        var button = $('<spotify_button></spotify_button>').text(text).attr({class: 'search_more_btn', path:url, searchType: 'albumsByArtist', id: 'add_albumsByArtist'});
         return $('<div></div>').append(button).html();
     });
 

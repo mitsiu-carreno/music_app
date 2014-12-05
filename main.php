@@ -114,7 +114,9 @@
         </div>
         <br>
         {{{add_albumsByArtist "+ Albums" next}}}
-    <figure>
+        <br>
+        <br>
+    </figure>
 </script>
 
 <script id="album_info-template" type="text/x-handlebars-template">
@@ -222,14 +224,18 @@
 <script id="albums_byArtist-partial" type="text/x-handlebars-template">
     {{#if items}}
         {{#each items}}
-            <div class="album" id="{{id}}" style="width:50%; float:left">
-                <div style="background-image:url({{images.0.url}}); float:left" class="cover"></div>
-                <div id="album_info" style="float:left">
-                    ID:{{id}}
+            <div class="albums_byArtist" id="{{id}}" style="width:100%; float:left">
+                <div style="background-image:url({{images.0.url}}); float:left; margin-left:20%" class="cover"></div>
+                <div id="album_info">
                     <br>
-                    ALBUM_NAME:{{name}}
+                    {{name}}
+                    <br>
+                    <spotify_button>Click me to see my songs</spotify_button>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
         {{/each}}
     {{else}}
         <p>No se encontró ningún album :(</p>
