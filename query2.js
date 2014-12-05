@@ -91,6 +91,7 @@ $(document).ready(function(){
                         next_url(btn_id, url, response.albums.next);
             			break;
                     case "albumsByArtist":
+                        response = seachAlbumTracksByArtist(response)
                         $("#"+type).append(partial_albumsByArtist(response));
                         next_url(btn_id, url, response.next);
                         break;
@@ -224,6 +225,7 @@ $(document).ready(function(){
                 response.artist_id= id;
                 //response = JSON.stringify(result);
                 //console.log(response);
+                response = seachAlbumTracksByArtist(response);
                 el.parent().closest("div").after(artist_info_template(response));
                 $(".artist_info").fadeIn('slow');
                 //$(".artist_info").append(album_template(response));
@@ -231,29 +233,6 @@ $(document).ready(function(){
                 //$("#albumsByArtist").html(partial_albumsByArtist(response));
             }
         });
-        /*
-        $.ajax({
-            url: api_spotify + "artists/"+ id + "/top-tracks",
-            data:{
-                country :"MX",
-                limit: setLimit
-            },
-            success : function(response){
-                
-                $("#top_tracks").html(partial_top_tracks(response));
-            }
-        });
-        /*
-        if(artist_info_template != ''){
-            $(this).parent().closest("div").after(artist_info_template(response)); 
-            artist_info_template='';
-         }
-         else{
-             //console.log($(this).next('figure'));
-             $(this).parent().closest("div").next('figure').remove(); 
-             artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
-         }
-         */
     } 
 
     $(document).on("click", ".play_top", function(){
@@ -261,6 +240,12 @@ $(document).ready(function(){
         go_to_player(uri);
     });
 
+    var seachAlbumTracksByArtist= function(response){
+        jQuery.each(response.items, function(index, value) {
+            console.log(value.uri);
+        });
+        return response;
+    }
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
     Handlebars.registerHelper("add_tracks", function (text, url) {
