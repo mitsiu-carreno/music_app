@@ -104,7 +104,7 @@
 
 <!--Template_Artist-->
 <script id="artist_info-template" type="text/x-handlebars-template">
-    <figure class="artist_info div_info">
+    <figure class="artist_info div_info" id="{{artist_id}}">
         <h1>{{artist_name}}<h1>
         <spotify_button class="play_top" id="{{artist_id}}">Listen Top Tracks</spotify_button>
         <br>
