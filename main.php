@@ -104,12 +104,9 @@
 
 <!--Template_Artist-->
 <script id="artist_info-template" type="text/x-handlebars-template">
-    <figure class="artist_info div_info" id="{{tracks.0.artists.0.id}}">
-        {{{name_artist tracks.0.artists.0.name}}}
-        <h1>Top Tracks</h1>
-        <div id="top_tracks">
-            {{> topTracks}}
-        </div>
+    <figure class="artist_info div_info">
+        <h1>{{artist_name}}<h1>
+        <spotify_button class="play_top" id="{{artist_id}}">Listen Top Tracks</spotify_button>
         <br>
         <h1>Albums</h1>
         <div id="albumsByArtist">  
@@ -123,12 +120,17 @@
 <script id="album_info-template" type="text/x-handlebars-template">
     <figure class="album_info div_info" id="{{id}}">
         <h1>{{name}}</h1>
-        <br>by {{#each artists}}{{name}}<br>{{/each}}
-        <h4 style="color:#84bd00">Click to listen</h4>
-        Tracks: <br>
+        <br>
+        <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
+        <spotify_button class="play_album" id="{{id}}">Click me to listen</spotify_button>
+        <br>
+        <br>
+        Tracks: 
+        <br>
         {{#each tracks.items}}
             {{track_number}}-{{name}}<br>
         {{/each}}
+        <br>
     </figure>
 </script>
 
@@ -174,7 +176,7 @@
                 <div id="cut">
             {{/moduloIf}}
                 <figure class="effect-romeo">
-                    <div class="artist" id="{{id}}">
+                    <div class="artist" id="{{id}}" name="{{name}}">
                         <img src="{{#if images.0.url}}{{images.0.url}}
                             {{else}}http://static2.businessinsider.com/image/4e1b276e49e2ae487d020000-480/spotify-horns.jpg{{/if}}"/>
                         <figcaption>
@@ -234,29 +236,6 @@
     {{/if}}
 </script>
 
-<script id="top_tracks-partial" type="text/x-handlebars-template">
-    {{#if tracks}}
-        {{#each tracks}}
-            <div class="top_track" id="{{id}}" style="width:50%; float:left">
-                <div style="background-image:url({{album.images.0.url}}); float:left" class="cover"></div>
-                <div id="track_info" style="float:left">
-                    ID:{{id}}
-                    <br>
-                    TRACK_NAME:{{name}}
-                    <br>
-                    ARTISTS:
-                        {{#each artists}}
-                            {{name}}<br>
-                        {{/each}}
-                    ALBUM:{{album.name}}
-                </div>
-            </div>
-        {{/each}}
-    {{else}}
-        <p>NO se encontró ningún track</p>
-    {{/if}}
-</script>
-
 <style type="text/css">
 	body {
         color:white;
@@ -285,11 +264,37 @@
 }
 
 .div_info{
-    width:900px !important; 
-    max-width:900px !important; 
-    border:3px solid white; 
+    width:95% !important; 
+    max-width:95% !important; 
+    border:2px solid white; 
     overflow-y:auto !important; 
     display:none;
+    cursor:auto !important;
+}
+spotify_button{
+    border-radius: 500px;
+    border-width: 2px;
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    line-height: 1.5;
+    min-width: 130px;
+    padding: 8px 25px 4px;
+    text-transform: uppercase;
+    white-space: normal;
+    color: #fff;
+    background-color: #84bd00;
+    border-color: #84bd00;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+}
+spotify_button:hover{
+    background-color: #598000;
 }
 </style>
 

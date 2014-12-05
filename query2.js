@@ -15,7 +15,6 @@ $(document).ready(function(){
         partial_track_source = document.getElementById('track-partial').innerHTML,
 		partial_artist_source = document.getElementById('artist-partial').innerHTML,
 		partial_album_source = document.getElementById('album-partial').innerHTML,
-        partial_top_source = document.getElementById('top_tracks-partial').innerHTML,
         partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
 
         artist_template = Handlebars.compile(artist_template_source),
@@ -28,7 +27,6 @@ $(document).ready(function(){
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
-        partial_top_tracks = Handlebars.compile(partial_top_source),
         partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
 
 		tracks_area = document.getElementById('tracks_area'),
@@ -43,8 +41,6 @@ $(document).ready(function(){
 	Handlebars.registerPartial("artist", partial_artist);
 
 	Handlebars.registerPartial("album", partial_album);
-
-    Handlebars.registerPartial("topTracks", partial_top_tracks),
 
     Handlebars.registerPartial('albums_byArtist', partial_albumsByArtist),
 
@@ -186,7 +182,7 @@ $(document).ready(function(){
         });
     }
 
-    $(document).on('click', '.album_info', function(){
+    $(document).on('click', '.play_album', function(){
         var uri = {"uri": "spotify:album:" + $(this).attr("id")}
         go_to_player(uri);
     });
@@ -212,18 +208,24 @@ $(document).ready(function(){
         var resume = destroy_div_info($(this).attr("id"), "artist_info");
         console.log("resume" + resume);
         if(resume){
-            searchByArtist($(this).attr("id"), $(this));
+            searchByArtist($(this).attr("id"), $(this), $(this).attr("name"));
         }
      });
      
-    var searchByArtist = function(id, el){
+    var searchByArtist = function(id, el, name){
         $.ajax({
             url: api_spotify + "artists/" + id + "/albums",
             data:{
                 limit: setLimit
             },
             success : function (response){
+                //var result = JSON.parse(response);
+                response.artist_name=name;  //Adding element wow!!
+                response.artist_id= id;
+                //response = JSON.stringify(result);
+                //console.log(response);
                 el.parent().closest("div").after(artist_info_template(response));
+                $(".artist_info").fadeIn('slow');
                 //resultsPlaceholder.innerHTML = artist_template(response);
                 //$("#albumsByArtist").html(partial_albumsByArtist(response));
             }
@@ -251,7 +253,12 @@ $(document).ready(function(){
              artist_info = '<figure style="width:900px; background-color:red; max-width:900px" class="album_info">TEST Artist-info</figure>'  
          }
          */
-    }   
+    } 
+
+    $(document).on("click", ".play_top", function(){
+        var uri = {"uri": "spotify:artist:" + $(this).attr("id")}
+        go_to_player(uri);
+    });
 
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
