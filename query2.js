@@ -291,3 +291,137 @@ $(document).ready(function(){
     });
     
 });
+
+    /*
+    EXAMPLE:
+                    response = {
+  "href" : "https://api.spotify.com/v1/artists/0YC192cP3KPCRWx8zr8MfZ/albums?offset=0&limit=3&album_type=single,album,compilation,appears_on",
+  "items" : [ {
+    
+  "tracks" : [{
+
+      "name" : "Look Closely"
+    }, {
+ 
+      "name" : "It's the Ripples That Give the Work Meaning"
+    }, {
+
+      "name" : "Rise Up"
+    }, {
+      
+      "name" : "Hello You Beauty"
+    }, {
+      
+      "name" : "What's the Best Thing You've Ever Stolen?"
+    }, {
+      
+      "name" : "I Love Blood on the Snow"
+    }, {
+      
+      "name" : "Princess Bed"
+    }, {
+      
+      "name" : "Can You Hear Your Heart?"
+    }, {
+      "name" : "This Isn't Right"
+    }, {
+      
+      "name" : "You Don't Quit Me, Boy"
+    }, {
+      
+      "name" : "Light as a Feather"
+      
+    }, {
+      
+      "name" : "She Was Like a Bright Light"
+    }, {
+      
+      "name" : "The Girl with the Red Hair"
+    }, {
+      
+      "name" : "Becoming Stars"
+      
+    }, {
+      
+      "name" : "Miracle"
+    } ],
+
+    "album_type" : "album",
+    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/album/7a78GiEowpaCa7ZJs44xUU"
+    },
+    "href" : "https://api.spotify.com/v1/albums/7a78GiEowpaCa7ZJs44xUU",
+    "id" : "7a78GiEowpaCa7ZJs44xUU",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ad5515d742f65d0c1754aabdf38d39c3648f639b",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://i.scdn.co/image/04ed3455061681bc54f9d5efb258d023f627842c",
+      "width" : 300
+    }, {
+      "height" : 64,
+      "url" : "https://i.scdn.co/image/e95b2212f76cd2bd6170ffb1f83cb7162814ec8f",
+      "width" : 64
+    } ],
+    "name" : "Interstellar: Original Motion Picture Soundtrack",
+    "type" : "album",
+    "uri" : "spotify:album:7a78GiEowpaCa7ZJs44xUU"
+  }, {
+    "album_type" : "album",
+    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/album/1IXbQTfzPJiozrzpjBEbcf"
+    },
+    "href" : "https://api.spotify.com/v1/albums/1IXbQTfzPJiozrzpjBEbcf",
+    "id" : "1IXbQTfzPJiozrzpjBEbcf",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ad5515d742f65d0c1754aabdf38d39c3648f639b",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://i.scdn.co/image/04ed3455061681bc54f9d5efb258d023f627842c",
+      "width" : 300
+    }, {
+      "height" : 64,
+      "url" : "https://i.scdn.co/image/e95b2212f76cd2bd6170ffb1f83cb7162814ec8f",
+      "width" : 64
+    } ],
+    "name" : "Interstellar: Original Motion Picture Soundtrack (Deluxe Version)",
+    "type" : "album",
+    "uri" : "spotify:album:1IXbQTfzPJiozrzpjBEbcf"
+  }, {
+    "album_type" : "album",
+    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/album/55yZqIqwPFbrNf3nxUfjQZ"
+    },
+    "href" : "https://api.spotify.com/v1/albums/55yZqIqwPFbrNf3nxUfjQZ",
+    "id" : "55yZqIqwPFbrNf3nxUfjQZ",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/9e5b4e45f9d4e7f39839f6fca5e938fff2c44e06",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://i.scdn.co/image/fb7adaccfc4b0f6201bfe2e1d5e5bfc20e15b3e5",
+      "width" : 300
+    }, {
+      "height" : 64,
+      "url" : "https://i.scdn.co/image/7bc429c43dcc151ba0e5c4e8c4ea43058e5e4100",
+      "width" : 64
+    } ],
+    "name" : "Winter's Tale: Original Motion Picture Soundtrack",
+    "type" : "album",
+    "uri" : "spotify:album:55yZqIqwPFbrNf3nxUfjQZ"
+  } ],
+  "limit" : 3,
+  "next" : "https://api.spotify.com/v1/artists/0YC192cP3KPCRWx8zr8MfZ/albums?offset=3&limit=3&album_type=single,album,compilation,appears_on",
+  "offset" : 0,
+  "previous" : null,
+  "total" : 303
+};
+    */

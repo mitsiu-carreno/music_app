@@ -230,7 +230,7 @@
                     <br>
                     {{name}}
                     <br>
-                    {{#each track}}
+                    {{#each tracks}}
                         {{name}}<br>
                     {{/each}}
                     <spotify_button>Click me to see my songs</spotify_button>
