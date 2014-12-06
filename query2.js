@@ -265,6 +265,10 @@ $(document).ready(function(){
         console.log(albums);
         return albums;
     }
+
+    $(document).on("click", ".display_album_info_byArtist", function(){
+        $(this).next().toggle();
+    });
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
     Handlebars.registerHelper("add_tracks", function (text, url) {

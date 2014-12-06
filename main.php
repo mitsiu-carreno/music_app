@@ -227,15 +227,13 @@
         {{#each items}}
             <div class="albums_byArtist" id="{{id}}" style="width:100%; float:left">
                 <div style="background-image:url({{images.0.url}}); float:left; margin-left:12%" class="cover"></div>
-                <div id="album_info" style="float:right; margin-right:7%; width:60%">
-                    <br>
-                    <h2 style="word-wrap: break-word;">{{name}}</h2>
+                <h2 style="word-wrap: break-word;cursor:pointer" class="display_album_info_byArtist">{{name}}</h2>
+                <div class="album_info_byArtist" style="float:right; margin-right:7%; width:60%; display:none">
                     <br>
                     {{#each tracks}}{{name}}<br>{{/each}}   
-                    <spotify_button class="play_album" id="{{id}}">Listen Album</spotify_button>
-                    <br>
-                    <div style="height:9px"></div>
+                    <div style="margin-top:15px"></div>
                 </div>
+                <spotify_button class="play_album" id="{{id}}">Listen Album</spotify_button>
             </div>
         {{/each}}
     {{else}}
@@ -256,14 +254,14 @@
 }
 
 .cover {
-    width: 150px;
-    height: 150px;
+    width: 194px;
+    height: 194px;
     display: inline-block;
     background-size: cover;
 }
 
 .cover:hover {
-    cursor: pointer;
+    //cursor: pointer;
 }
 
 .cover.playing {
