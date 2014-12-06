@@ -225,13 +225,12 @@
     {{#if items}}
         {{#each items}}
             <div class="albums_byArtist" id="{{id}}" style="width:100%; float:left">
-                <div style="background-image:url({{images.0.url}}); float:left; margin-left:20%" class="cover"></div>
-                <div id="album_info">
+                <div id="albums_byArtist_info" style="float:right; margin-right:8%; width:65%; background-image:url({{images.0.url}});">
                     <br>
-                    <h2>{{name}}</h2>
+                    <h2 style="word-wrap: break-word;">{{name}}</h2>
                     <br>
                     {{#each tracks}}{{name}}<br>{{/each}}   
-                    <spotify_button>Click me to see my songs</spotify_button>
+                    <spotify_button class="play_album" id={{id}}>Listen Album</spotify_button>
                 </div>
             </div>
             <br>
@@ -303,6 +302,10 @@ spotify_button{
 spotify_button:hover{
     background-color: #598000;
 }
+#albums_byArtist_info{
+
+}
+
 </style>
 
 </body>

@@ -262,7 +262,7 @@ $(document).ready(function(){
                 }
             });
         });
-        //console.log(albums);
+        console.log(albums);
         return albums;
     }
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
