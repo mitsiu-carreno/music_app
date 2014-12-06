@@ -228,11 +228,9 @@
                 <div style="background-image:url({{images.0.url}}); float:left; margin-left:20%" class="cover"></div>
                 <div id="album_info">
                     <br>
-                    {{name}}
+                    <h2>{{name}}</h2>
                     <br>
-                    {{#each tracks}}
-                        {{name}}<br>
-                    {{/each}}
+                    {{#each tracks}}{{name}}<br>{{/each}}   
                     <spotify_button>Click me to see my songs</spotify_button>
                 </div>
             </div>

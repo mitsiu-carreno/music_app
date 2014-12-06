@@ -245,16 +245,24 @@ $(document).ready(function(){
         var album;
         jQuery.each(albums.items, function(index, value) {        //PARA CADA ALBUM
             album = value.name;
+            //console.log(value);
             $.ajax({
+                async:false,
                 url: value.href,
                 success: function (canciones){
+                    var each_song = [];
                     jQuery.each(canciones.tracks.items, function(index2, value2){  //PARA CADA TRACK
-                        canciones.track=value2.name;
+                        //albums.items[0]["something"] = "testing";
+                        each_song.push({"name": value2.name});
+                        //albums.items[index].trackedfuck = "";
                     });
-                    console.log(canciones);
+                    albums.items[index].tracks = each_song;
+                    //console.log(each_song);
+
                 }
             });
         });
+        //console.log(albums);
         return albums;
     }
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
