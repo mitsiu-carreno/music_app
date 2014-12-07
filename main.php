@@ -23,7 +23,7 @@
                         <input type="submit" id="search" class="btn btn-primary" value="Search" />
                     </form>
                     <div id="player_area"></div>
-                <ul class="vs-nav">
+                <ul class="vs-nav" style="display:inline-block">
                     <li><a href="#section-1">Tracks</a></li>
                     <li><a href="#section-2">Artists</a></li>
                     <li><a href="#section-3">Albums</a></li>
@@ -99,7 +99,9 @@
 </script>
 
 <script id="player-template"type="text/x-handlebars-template">
-<p style="text-align:center"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
+<div id="recomendation1" style="width:25%; height:330; float:left; background-color:black"></div>
+<p style="float:left; width:50%"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
+<div id="recomendation2" style="width:25%; height:330; float:right; background-color:black"></div>
 </script>
 
 <!--Template_Artist-->
