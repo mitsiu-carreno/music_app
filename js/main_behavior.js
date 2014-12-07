@@ -10,12 +10,14 @@ $(document).ready(function(){
         player_template_source = document.getElementById('player-template').innerHTML,
         artist_info_template_source = document.getElementById('artist_info-template').innerHTML,
         album_info_template_source = document.getElementById('album_info-template').innerHTML,
+        recomendaciones_template_source = document.getElementById('recomendaciones-template').innerHTML,
 
 
         partial_track_source = document.getElementById('track-partial').innerHTML,
 		partial_artist_source = document.getElementById('artist-partial').innerHTML,
 		partial_album_source = document.getElementById('album-partial').innerHTML,
-        partial_albumsByArtist = document.getElementById('albums_byArtist-partial').innerHTML,
+        partial_albumsByArtist_source = document.getElementById('albums_byArtist-partial').innerHTML,
+        //partial_recomendaciones_source = document.getElementById('recomendaciones-partial').innerHTML,
 
         artist_template = Handlebars.compile(artist_template_source),
         track_template = Handlebars.compile(track_template_source),
@@ -23,16 +25,20 @@ $(document).ready(function(){
         player_template = Handlebars.compile(player_template_source),
         artist_info_template = Handlebars.compile(artist_info_template_source),
         album_info_template = Handlebars.compile(album_info_template_source),
+        recomendaciones_template = Handlebars.compile(recomendaciones_template_source),
 
 		partial_track = Handlebars.compile(partial_track_source),
 		partial_artist = Handlebars.compile(partial_artist_source),
 		partial_album = Handlebars.compile(partial_album_source),
-        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist),
+        partial_albumsByArtist = Handlebars.compile(partial_albumsByArtist_source),
+        //partial_recomendaciones = Handlebars.compile(partial_recomendaciones_source),
 
 		tracks_area = document.getElementById('tracks_area'),
         artists_area = document.getElementById('artists_area'),
         albums_area = document.getElementById('albums_area'),
         player_area = document.getElementById('player_area');
+        recomendaciones1_area = document.getElementById('recomendation1'),
+        recomendaciones2_area = document.getElementById('recomendation2');
 
 
 
@@ -43,6 +49,7 @@ $(document).ready(function(){
 	Handlebars.registerPartial("album", partial_album);
 
     Handlebars.registerPartial('albums_byArtist', partial_albumsByArtist),
+
 
     /////////////////////////////////////////----------GENERAL----------/////////////////////////////////////////
     //Reaizar Busqueda
@@ -117,8 +124,13 @@ $(document).ready(function(){
     }
 
     //Animación para auto scroll al player
-    var go_to_player = function(response){
+    var go_to_player = function(response, id_artitst){
+        //var related = searchRelatedArtists(id_artitst);
+        //var top_related = getTopRelated(related);
+        console.log(id_artitst);
         player_area.innerHTML =player_template(response);
+        $("#recomendation1").html(recomendaciones_template(response));
+        $("#recomendation2").html(recomendaciones_template(response));
         $('html, body').animate({     
             scrollTop: $("#player_area").offset().top -200
         }, 500);
@@ -137,6 +149,10 @@ $(document).ready(function(){
         }
         return resume;
     }
+
+    var searchRelatedArtists = function (artist_id){
+        console.log("artist_id " + artist_id);
+    }
     /////////////////////////////////////////----------TRACKS----------/////////////////////////////////////////
 
     $(document).on('click', '.track', function(e){              //01010100101010 OPTIMIZAR con albums (y artistas??)
@@ -146,7 +162,7 @@ $(document).ready(function(){
         $.ajax({
             url:api_spotify + type + "s/"+ id,
             success: function(response){
-                go_to_player(response);
+                go_to_player(response, response.artists[0].id);
                 response = {"response":response}
                 $.ajax({
                     type: "POST",
@@ -187,8 +203,9 @@ $(document).ready(function(){
     }
 
     $(document).on('click', '.play_album', function(){
+        var artist_id = $(this).attr("artist_id");
         var uri = {"uri": "spotify:album:" + $(this).attr("id")}
-        go_to_player(uri);
+        go_to_player(uri,artist_id);
     });
 
     /*  VERIFICAR USO
@@ -239,8 +256,9 @@ $(document).ready(function(){
     } 
 
     $(document).on("click", ".play_top", function(){
-        var uri = {"uri": "spotify:artist:" + $(this).attr("id")}
-        go_to_player(uri);
+        var artist_id = $(this).attr("id");
+        var uri = {"uri": "spotify:artist:" + artist_id}
+        go_to_player(uri, artist_id);
     });
 
     var seachAlbumTracksByArtist= function(albums){
@@ -307,136 +325,3 @@ $(document).ready(function(){
     
 });
 
-    /*
-    EXAMPLE:
-                    response = {
-  "href" : "https://api.spotify.com/v1/artists/0YC192cP3KPCRWx8zr8MfZ/albums?offset=0&limit=3&album_type=single,album,compilation,appears_on",
-  "items" : [ {
-    
-  "tracks" : [{
-
-      "name" : "Look Closely"
-    }, {
- 
-      "name" : "It's the Ripples That Give the Work Meaning"
-    }, {
-
-      "name" : "Rise Up"
-    }, {
-      
-      "name" : "Hello You Beauty"
-    }, {
-      
-      "name" : "What's the Best Thing You've Ever Stolen?"
-    }, {
-      
-      "name" : "I Love Blood on the Snow"
-    }, {
-      
-      "name" : "Princess Bed"
-    }, {
-      
-      "name" : "Can You Hear Your Heart?"
-    }, {
-      "name" : "This Isn't Right"
-    }, {
-      
-      "name" : "You Don't Quit Me, Boy"
-    }, {
-      
-      "name" : "Light as a Feather"
-      
-    }, {
-      
-      "name" : "She Was Like a Bright Light"
-    }, {
-      
-      "name" : "The Girl with the Red Hair"
-    }, {
-      
-      "name" : "Becoming Stars"
-      
-    }, {
-      
-      "name" : "Miracle"
-    } ],
-
-    "album_type" : "album",
-    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
-    "external_urls" : {
-      "spotify" : "https://open.spotify.com/album/7a78GiEowpaCa7ZJs44xUU"
-    },
-    "href" : "https://api.spotify.com/v1/albums/7a78GiEowpaCa7ZJs44xUU",
-    "id" : "7a78GiEowpaCa7ZJs44xUU",
-    "images" : [ {
-      "height" : 640,
-      "url" : "https://i.scdn.co/image/ad5515d742f65d0c1754aabdf38d39c3648f639b",
-      "width" : 640
-    }, {
-      "height" : 300,
-      "url" : "https://i.scdn.co/image/04ed3455061681bc54f9d5efb258d023f627842c",
-      "width" : 300
-    }, {
-      "height" : 64,
-      "url" : "https://i.scdn.co/image/e95b2212f76cd2bd6170ffb1f83cb7162814ec8f",
-      "width" : 64
-    } ],
-    "name" : "Interstellar: Original Motion Picture Soundtrack",
-    "type" : "album",
-    "uri" : "spotify:album:7a78GiEowpaCa7ZJs44xUU"
-  }, {
-    "album_type" : "album",
-    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
-    "external_urls" : {
-      "spotify" : "https://open.spotify.com/album/1IXbQTfzPJiozrzpjBEbcf"
-    },
-    "href" : "https://api.spotify.com/v1/albums/1IXbQTfzPJiozrzpjBEbcf",
-    "id" : "1IXbQTfzPJiozrzpjBEbcf",
-    "images" : [ {
-      "height" : 640,
-      "url" : "https://i.scdn.co/image/ad5515d742f65d0c1754aabdf38d39c3648f639b",
-      "width" : 640
-    }, {
-      "height" : 300,
-      "url" : "https://i.scdn.co/image/04ed3455061681bc54f9d5efb258d023f627842c",
-      "width" : 300
-    }, {
-      "height" : 64,
-      "url" : "https://i.scdn.co/image/e95b2212f76cd2bd6170ffb1f83cb7162814ec8f",
-      "width" : 64
-    } ],
-    "name" : "Interstellar: Original Motion Picture Soundtrack (Deluxe Version)",
-    "type" : "album",
-    "uri" : "spotify:album:1IXbQTfzPJiozrzpjBEbcf"
-  }, {
-    "album_type" : "album",
-    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
-    "external_urls" : {
-      "spotify" : "https://open.spotify.com/album/55yZqIqwPFbrNf3nxUfjQZ"
-    },
-    "href" : "https://api.spotify.com/v1/albums/55yZqIqwPFbrNf3nxUfjQZ",
-    "id" : "55yZqIqwPFbrNf3nxUfjQZ",
-    "images" : [ {
-      "height" : 640,
-      "url" : "https://i.scdn.co/image/9e5b4e45f9d4e7f39839f6fca5e938fff2c44e06",
-      "width" : 640
-    }, {
-      "height" : 300,
-      "url" : "https://i.scdn.co/image/fb7adaccfc4b0f6201bfe2e1d5e5bfc20e15b3e5",
-      "width" : 300
-    }, {
-      "height" : 64,
-      "url" : "https://i.scdn.co/image/7bc429c43dcc151ba0e5c4e8c4ea43058e5e4100",
-      "width" : 64
-    } ],
-    "name" : "Winter's Tale: Original Motion Picture Soundtrack",
-    "type" : "album",
-    "uri" : "spotify:album:55yZqIqwPFbrNf3nxUfjQZ"
-  } ],
-  "limit" : 3,
-  "next" : "https://api.spotify.com/v1/artists/0YC192cP3KPCRWx8zr8MfZ/albums?offset=3&limit=3&album_type=single,album,compilation,appears_on",
-  "offset" : 0,
-  "previous" : null,
-  "total" : 303
-};
-    */

@@ -22,7 +22,11 @@
                         <input type="text" id="query" value="hans zimmer" class="form-control" />
                         <input type="submit" id="search" class="btn btn-primary" value="Search" />
                     </form>
-                    <div id="player_area"></div>
+                    <div id="grecias_area">
+                        <div id="recomendation1"></div>
+                        <div id="player_area"></div>
+                        <div id="recomendation2"></div>
+                    </div>
                 <ul class="vs-nav" style="display:inline-block">
                     <li><a href="#section-1">Tracks</a></li>
                     <li><a href="#section-2">Artists</a></li>
@@ -99,9 +103,7 @@
 </script>
 
 <script id="player-template"type="text/x-handlebars-template">
-<div id="recomendation1" style="width:25%; height:330; float:left; background-color:black"></div>
-<p style="float:left; width:50%"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
-<div id="recomendation2" style="width:25%; height:330; float:right; background-color:black"></div>
+    <p style="float:left; width:50%"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
 </script>
 
 <!--Template_Artist-->
@@ -131,7 +133,7 @@
         <h1>{{name}}</h1>
         <br>
         <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
-        <spotify_button class="play_album" id="{{id}}">Click me to listen</spotify_button>
+        <spotify_button class="play_album" id="{{id}}" artist_id="{{artists.0.id}}">Click me to listen</spotify_button>
         <br>
         <br>
         Tracks: 
@@ -141,6 +143,20 @@
         {{/each}}
         <br>
     </figure>
+</script>
+
+<script id="recomendaciones-template" type="text/x-handlebars-template">
+    <div style="width:25%; height:330; float:left; background-color:black">
+        <h3>We recommend:</h3>
+        {{artists.0.id}}
+        {{#each tracks}}
+            <div style="border:1px solid yellow">
+                each
+                {{name}}
+                {{album.name}}
+            </div>
+        {{/each}}
+    </div>
 </script>
 
 <!--Partials-->
@@ -239,7 +255,7 @@
                     {{#each tracks}}{{name}}<br>{{/each}}   
                     <div style="margin-top:15px"></div>
                 </div>
-                <spotify_button class="play_album" id="{{id}}">Listen Album</spotify_button>
+                <spotify_button class="play_album" id="{{id}}" artist_id="{{../artist_id}}">Listen Album</spotify_button>
             </div>
         {{/each}}
     {{else}}
