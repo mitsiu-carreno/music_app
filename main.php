@@ -114,7 +114,11 @@
         </div>
         <br>
         <br>
+        {{#if next}}
         <div style="margin-top:5%">{{{add_albumsByArtist "+ Albums" next}}}</div>
+        {{else}}
+            Eso es todo lo que hemos podido encontrar :(
+        {{/if}}
         <br>
         <br>
     </figure>
