@@ -147,6 +147,7 @@ $(document).ready(function(){
             url:api_spotify + type + "s/"+ id,
             success: function(response){
                 go_to_player(response);
+                response = {"response":response}
                 $.ajax({
                     type: "POST",
                     url: global_url + "beans/insert.php",
