@@ -63,6 +63,9 @@ $(document).ready(function(){
                 tracks_area.innerHTML = track_template(response);
                 artists_area.innerHTML = artist_template(response);
                 albums_area.innerHTML = album_template(response);
+                $('html, body').animate({
+                    scrollTop: $(".vs-content").offset().top
+                }, 500);
             }
         });
     }
