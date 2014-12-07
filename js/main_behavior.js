@@ -149,11 +149,10 @@ $(document).ready(function(){
                 go_to_player(response);
                 $.ajax({
                     type: "POST",
-                    url: global_url + "insert.php",
+                    url: global_url + "beans/insert.php",
                     data: response,
                     
                     success: function(result){
-
                         console.log(result);        //<----INCOMPETE
                     },
                     error: function (request, status, errorThrown){

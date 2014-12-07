@@ -1,5 +1,4 @@
 <?php
-
 try{
 	$user="root";
 	$pass="mitc5003";
@@ -17,7 +16,8 @@ try{
 	die(); 
 }
 
-# a simple object
+/* FUNCTIONAL EXAMPLE
+
 class person {
     public $name;
     public $addr;
@@ -33,6 +33,7 @@ class person {
  
 $cathy = new person('Cathy','9 Dark and Twisty','Cardiff');
  
-# here's the fun part:
 $STH = $db->prepare("INSERT INTO folks (name, addr, city) value (:name, :addr, :city)");
 $STH->execute((array)$cathy);
+
+*/
