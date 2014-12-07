@@ -7,9 +7,10 @@ include 'Track.php';
 
 	
 	try {
- 	 	$response = $_POST['name'];
+ 	 	$response = $_POST["album"];
   		$track = new track($response);
-        var_dump($response);
+        //var_dump($response);
+        var_dump($track->track);
 	} catch(Exception $ex){
   		header("HTTP/1.0 502 Data cannot be retreive");
 	}

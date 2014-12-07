@@ -24,7 +24,7 @@ class track{
 	public $vecesReproducida;
 		
 	function __construct($response){
-			$this->track = $response;
+			$this->track = $response["id"];
 		}
 	}
 
