@@ -14,7 +14,7 @@
         <script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-    <!--<?php include 'connection.php' ?>-->
+    <?php include 'connection.php' ?>
     <div id="vs-container" class="vs-container">
             <header class="vs-header">
                 <h1>Search for an Artist/Album/Track</h1>

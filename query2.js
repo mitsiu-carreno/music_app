@@ -1,4 +1,4 @@
-    var global_url = 'http://localhost/R&D/spotify/2-JSFIDLE/testing/';
+    var global_url = 'http://localhost/R&D/spotify/testing/';
     var api_spotify = 'https://api.spotify.com/v1/';
     var setLimit = 6;
 
@@ -210,7 +210,7 @@ $(document).ready(function(){
      /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
         var resume = destroy_div_info($(this).attr("id"), "artist_info");
-        console.log("resume" + resume);
+        //console.log("resume" + resume);
         if(resume){
             searchByArtist($(this).attr("id"), $(this), $(this).attr("name"));
         }
