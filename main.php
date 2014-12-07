@@ -8,13 +8,13 @@
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/set1Custom.css" />
         <link rel="stylesheet" type="text/css" href="css/component.css" />
-	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="handlebars-v2.0.0.js"></script>
-	<script type="text/javascript" src="query2.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/handlebars-v2.0.0.js"></script>
+	<script type="text/javascript" src="js/main_behavior.js"></script>
         <script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-    <?php include 'connection.php' ?>
+    <?php include 'beans/connection.php' ?>
     <div id="vs-container" class="vs-container">
             <header class="vs-header">
                 <h1>Search for an Artist/Album/Track</h1>
