@@ -348,3 +348,40 @@ $(document).ready(function(){
     
 });
 
+/*CODING OFF LINE :(
+
+    var searchRelatedArtists = function (artist_id){
+        console.log("artist_id " + artist_id);
+        var recommendedTracks1 =[];
+        var recommendedTracks2 = []:
+        $.ajax({
+            async: false,
+            url: api_spotify +"artists/"+ artist_id +"/related-artists",
+                success: function(related){
+                    console.log(related);
+                    jQuery.each(related.artists, function(index, value) {
+                        
+                        $.ajax({
+                            async:false,
+                            url: api_spotify + "artists/"+ value.id +"/top-tracks?country=MX",
+                            success: function (topSongs){
+                                if(index<=5){
+                                    recommendedTracks1.push({"songs": topSongs.tracks[0]});
+                                }
+                                else if(index>5){
+                                    recommendedTracks1.push({"songs": topSongs.tracks[0]});
+                                }
+                                else if(index>10){
+                                    return false;
+                                }
+                            }
+                        });
+
+                    });    
+                    console.log(recommendedTracks);
+                }
+        });
+        return [recommendedTracks1, recommendedTracks2];
+    }
+
+*/
