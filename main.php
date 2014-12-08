@@ -148,12 +148,9 @@
 <script id="recomendaciones-template" type="text/x-handlebars-template">
     <div style="width:25%; height:330; float:left; background-color:black">
         <h3>We recommend:</h3>
-        {{artists.0.id}}
-        {{#each tracks}}
+        {{#each this}}
             <div style="border:1px solid yellow">
-                each
-                {{name}}
-                {{album.name}}
+            hi
             </div>
         {{/each}}
     </div>

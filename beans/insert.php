@@ -10,7 +10,7 @@ include 'beans.php';
  	 	$response = $_POST["response"];
   		$track = new track($response);
         //var_dump($response);
-        var_dump($track->duration);
+        //var_dump($track->duration);
 	} catch(Exception $ex){
   		header("HTTP/1.0 502 Data cannot be retreive");
 	}

@@ -125,12 +125,12 @@ $(document).ready(function(){
 
     //Animación para auto scroll al player
     var go_to_player = function(response, id_artitst){
-        //var related = searchRelatedArtists(id_artitst);
+        var related = searchRelatedArtists(id_artitst);
         //var top_related = getTopRelated(related);
-        console.log(id_artitst);
+        //console.log(id_artitst);
         player_area.innerHTML =player_template(response);
-        $("#recomendation1").html(recomendaciones_template(response));
-        $("#recomendation2").html(recomendaciones_template(response));
+        $("#recomendation1").html(recomendaciones_template(related));
+        //$("#recomendation2").html(recomendaciones_template(related));
         $('html, body').animate({     
             scrollTop: $("#player_area").offset().top -200
         }, 500);
@@ -152,18 +152,29 @@ $(document).ready(function(){
 
     var searchRelatedArtists = function (artist_id){
         console.log("artist_id " + artist_id);
+        var recommendedTracks =[];
         $.ajax({
-            url: api_spotify +"artists/"+ idtrack +"/related-artists",
-                success: function(response){
-                    /*
-                    jQuery.each(response.artists, function(index, value) {
+            async: false,
+            url: api_spotify +"artists/"+ artist_id +"/related-artists",
+                success: function(related){
+                    console.log(related);
+                    jQuery.each(related.artists, function(index, value) {
+                        if(index>5){
+                            return false;
+                        }
                         $.ajax({
-                            searchtopTRacks
+                            async:false,
+                            url: api_spotify + "artists/"+ value.id +"/top-tracks?country=MX",
+                            success: function (topSongs){
+                                recommendedTracks.push({"songs": topSongs.tracks[0]});
+                            }
                         });
+
                     });    
-                    */
+                    console.log(recommendedTracks);
                 }
         });
+        return recommendedTracks;
     }
     /////////////////////////////////////////----------TRACKS----------/////////////////////////////////////////
 
