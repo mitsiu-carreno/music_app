@@ -23,9 +23,9 @@
                         <input type="submit" id="search" class="btn btn-primary" value="Search" />
                     </form>
                     <div id="grecias_area">
-                        <div id="recomendation1"></div>
-                        <div id="player_area"></div>
-                        <div id="recomendation2"></div>
+                        <div id="recoContainer1"></div>
+                        <div id="playerArea"></div>
+                        <div id="recoContainer2"></div>
                     </div>
                 <ul class="vs-nav" style="display:inline-block">
                     <li><a href="#section-1">Tracks</a></li>
@@ -37,126 +37,46 @@
                 <section id="section-1">
                     <div class="vs-content">
                         <h3>"Maybe I'm too busy being <br>yours to fall for somebody new"<br>-Arctic Monkeys</h3>
-                        <div id="tracks_area" style="clear:both"></div>
+                        <div id="tracksArea" style="clear:both"></div>
                     </div>
                 </section>
                 <section id="section-2">
                     <div class="vs-content">
-                        <h3>"Lights will guide you home and <br>ignite your bones and i will<br> try to fix you" <br>-Coldplay</h3>
-                            <div id="artists_area"style="clear:both"></div>
+                        <h3>"Lights will guide you home and <br>ignite your bones and i will
+                            <br> try to fix you" <br>-Coldplay</h3>
+                            <div id="artistsArea"style="clear:both"></div>
                     </div>
                 </section>
                 <section id="section-3">
                     <div class="vs-content">
-                        <h3>"You sit there in your heartache <br>waiting on some beautiful boy to save <br>you from your old ways"<br>-The Killers</h3>
-                            <div id="albums_area" style="clear:both"></div>
+                        <h3>"You sit there in your heartache <br>waiting on some beautiful boy to save 
+                            <br>you from your old ways"<br>-The Killers</h3>
+                            <div id="albumsArea" style="clear:both"></div>
                     </div>
                 </section>
             </div>
             <div class="codrops-top clearfix">
-                <span class="right"><a href="https://www.spotify.com/" target="_blank">Mitsiu A Carreño Sarabia</a><a href="https://github.com/mitsiu-carreno/music_app" target="_blank">Andoni Águila García</a><a href="http://tympanus.net/Development/TripleViewLayout/" target="_blank">Luis E Torres Herrera</a>
+                <span class="right">
+                    <a href="https://www.spotify.com/" target="_blank">Mitsiu A Carreño Sarabia</a>
+                    <a href="https://github.com/mitsiu-carreno/music_app" target="_blank">Andoni Águila García</a>
+                    <a href="http://tympanus.net/Development/TripleViewLayout/" target="_blank">Luis E Torres Herrera</a>
             </div>
         </div><!-- /vs-container -->
         <script src="js/classie.js"></script>
         <script src="js/hammer.min.js"></script>
         <script src="js/main.js"></script>
 
-<!--Template-->
+<!--Tracks Section-->
 <script id="tracks-template" type="text/x-handlebars-template">
     <h1>Tracks</h1>
-    <div class="grid">
-        <div id="tracks_results">
-        
-            {{> track}}
-        
-        </div>
+    <div id="tracksContainer" class="grid">  
+        {{> track}}
     </div>
     <br>
-    {{{add_tracks "+ Tracks" tracks.next}}}
+    {{{addTracks "+ Tracks" tracks.next}}}
     <br>
 </script>
 
-<script id="artists-template" type="text/x-handlebars-template">
-    <h1>Artists</h1>
-    <div class="grid">
-        <div id="artists_results">
-    
-            {{> artist}}
-        </div>
-    </div>
-    <br>
-    {{{add_artists "+ Artists" artists.next}}}
-    <br>
-</script>
-
-<script id="albums-template" type="text/x-handlebars-template">
-    <h1>Albums</h1>
-    <div class="grid">
-        <div id="albums_results">
-    
-        {{> album}}
-        </div>
-    </div>
-    <br>
-    {{{add_albums "+ Albums" albums.next}}}
-    <br>
-</script>
-
-<script id="player-template"type="text/x-handlebars-template">
-    <p style="float:left; width:50%"><iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></p>
-</script>
-
-<!--Template_Artist-->
-<script id="artist_info-template" type="text/x-handlebars-template">
-    <figure class="artist_info div_info" id="{{artist_id}}">
-        <h1>{{artist_name}}<h1>
-        <spotify_button class="play_top" id="{{artist_id}}">Listen Top Tracks</spotify_button>
-        <br>
-        <h1>Albums</h1>
-        <div id="albumsByArtist">  
-            {{> albums_byArtist}}
-        </div>
-        <br>
-        <br>
-        {{#if next}}
-        <div style="margin-top:5%">{{{add_albumsByArtist "+ Albums" next}}}</div>
-        {{else}}
-            Eso es todo lo que hemos podido encontrar :(
-        {{/if}}
-        <br>
-        <br>
-    </figure>
-</script>
-
-<script id="album_info-template" type="text/x-handlebars-template">
-    <figure class="album_info div_info" id="{{id}}">
-        <h1>{{name}}</h1>
-        <br>
-        <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
-        <spotify_button class="play_album" id="{{id}}" artist_id="{{artists.0.id}}">Click me to listen</spotify_button>
-        <br>
-        <br>
-        Tracks: 
-        <br>
-        {{#each tracks.items}}
-            {{track_number}}-{{name}}<br>
-        {{/each}}
-        <br>
-    </figure>
-</script>
-
-<script id="recomendaciones-template" type="text/x-handlebars-template">
-    <div style="width:25%; height:330; float:left; background-color:black">
-        <h3>We recommend:</h3>
-        {{#each this}}
-            <div style="border:1px solid yellow">
-            hi
-            </div>
-        {{/each}}
-    </div>
-</script>
-
-<!--Partials-->
 <script id="track-partial" type="text/x-handlebars-template">
     {{#if tracks.items}}
         {{#each tracks.items}}
@@ -166,18 +86,17 @@
             {{#moduloIf @index 0 3}}
                 <div id="cut">
             {{/moduloIf}}
-                <figure class="effect-sadie">
-                    <div class="track" id="{{id}}">
-                        <img src="{{album.images.0.url}}" alt="img01"/>
+                <figure class="effect-sadie track" idTrack="{{id}}">
+                        <img src="{{album.images.0.url}}"/>
                         <figcaption>
                             <h2>{{name}}</h2>
-                            <p>{{#each artists}}
+                            <p>
+                                {{#each artists}}
                                 {{name}}<br>
                                 {{/each}} 
-                                with {{album.name}}</p>
-                           
-                        </figcaption>     
-                    </div>    
+                                with {{album.name}}
+                            </p>
+                        </figcaption>      
                 </figure>
             {{#moduloIf @index 1 3}}
                 </div>
@@ -186,6 +105,17 @@
     {{else}}
     <p>No se encontró ningún track :(</p>
     {{/if}}
+</script>
+
+<!--Artists Sction-->
+<script id="artists-template" type="text/x-handlebars-template">
+    <h1>Artists</h1>
+    <div class="grid" id="artistsContainer">
+        {{> artist}}
+    </div>
+    <br>
+    {{{addArtists "+ Artists" artists.next}}}
+    <br>
 </script>
 
 <script id="artist-partial" type="text/x-handlebars-template">
@@ -197,14 +127,13 @@
             {{#moduloIf @index 0 3}}
                 <div id="cut">
             {{/moduloIf}}
-                <figure class="effect-romeo">
-                    <div class="artist" id="{{id}}" name="{{name}}">
-                        <img src="{{#if images.0.url}}{{images.0.url}}
-                            {{else}}http://static2.businessinsider.com/image/4e1b276e49e2ae487d020000-480/spotify-horns.jpg{{/if}}"/>
-                        <figcaption>
-                            <h2>{{name}}</h2>
-                        </figcaption>
-                    </div>
+                <figure class="effect-romeo artist" idArtist="{{id}}" nameArtist="{{name}}">
+                    <img src="{{#if images.0.url}}{{images.0.url}}{{else}}
+                        http://static2.businessinsider.com/image/4e1b276e49e2ae487d020000-480/spotify-horns.jpg
+                        {{/if}}"/>
+                    <figcaption>
+                        <h2>{{name}}</h2>
+                    </figcaption>
                 </figure>
             {{#moduloIf @index 1 3}}
                 </div>
@@ -213,6 +142,57 @@
     {{else}}
         <p>No se encontró ningún artista :(</p>
     {{/if}}
+</script>
+
+<script id="artistInfo-template" type="text/x-handlebars-template">
+    <figure class="artistInfoContainer" idArtist="{{artist_id}}">
+        <h1>{{artist_name}}<h1>
+        <spotify_button class="playTop" idArtist="{{artist_id}}">Listen Top Tracks</spotify_button>
+        <br>
+        <h1>Albums</h1>
+        <div id="albumsByArtistContainer">  
+            {{> albumsByArtist}}
+        </div>
+        <br>
+        <br>
+        {{#if next}}
+            <div style="margin-top:5%">{{{addAlbumsByArtist "+ Albums" next}}}</div>
+        {{else}}
+            Eso es todo lo que hemos podido encontrar :(
+        {{/if}}
+        <br>
+        <br>
+    </figure>
+</script>
+
+<script id="albumsByArtist-partial" type="text/x-handlebars-template">
+    {{#if items}}
+        {{#each items}}
+            <div class="albumByArtistContainer" idAlbum="{{id}}" style="width:100%; float:left">
+                <div style="background-image:url({{images.0.url}}); float:left; margin-left:12%" class="cover"></div>
+                <h2 style="word-wrap: break-word;cursor:pointer" class="displayAlbumInfoByArtist">{{name}}</h2>
+                <div class="albumInfoByArtist" style="float:right; margin-right:7%; width:60%; display:none">
+                    <br>
+                    {{#each tracks}}{{name}}<br>{{/each}}   
+                    <div style="margin-top:15px"></div>
+                </div>
+                <spotify_button class="playAlbum" idAlbum="{{id}}" idArtist="{{../artist_id}}">Listen Album</spotify_button>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No se encontró ningún album :(</p>
+    {{/if}}
+</script>
+
+<!--Albums Section-->
+<script id="albums-template" type="text/x-handlebars-template">
+    <h1>Albums</h1>
+    <div class="grid" id="albumsContainer">
+        {{> album}}
+    </div>
+    <br>
+    {{{addAlbums "+ Albums" albums.next}}}
+    <br>
 </script>
 
 <script id="album-partial" type="text/x-handlebars-template">
@@ -224,13 +204,11 @@
             {{#moduloIf @index 0 3}}
                 <div id="cut">
             {{/moduloIf}}
-                <figure class="effect-sarah">
-                    <div class="album" id="{{id}}">
-                        <img src="{{images.0.url}}" />
-                        <figcaption>
-                            <h2>{{name}}<h2>
-                        </figcaption>
-                    </div>
+                <figure class="effect-sarah" class="album" idAlbum="{{id}}">
+                    <img src="{{images.0.url}}" />
+                    <figcaption>
+                        <h2>{{name}}<h2>
+                    </figcaption>
                 </figure>
             {{#moduloIf @index 1 3}}
                 </div>
@@ -241,23 +219,40 @@
     {{/if}}
 </script>
 
-<script id="albums_byArtist-partial" type="text/x-handlebars-template">
-    {{#if items}}
-        {{#each items}}
-            <div class="albums_byArtist" id="{{id}}" style="width:100%; float:left">
-                <div style="background-image:url({{images.0.url}}); float:left; margin-left:12%" class="cover"></div>
-                <h2 style="word-wrap: break-word;cursor:pointer" class="display_album_info_byArtist">{{name}}</h2>
-                <div class="album_info_byArtist" style="float:right; margin-right:7%; width:60%; display:none">
-                    <br>
-                    {{#each tracks}}{{name}}<br>{{/each}}   
-                    <div style="margin-top:15px"></div>
-                </div>
-                <spotify_button class="play_album" id="{{id}}" artist_id="{{../artist_id}}">Listen Album</spotify_button>
+<script id="albumInfo-template" type="text/x-handlebars-template">
+    <figure class="albumInfoContainer" idAlbum="{{id}}">
+        <h1>{{name}}</h1>
+        <br>
+        <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
+        <spotify_button class="playAlbum" idAlbum="{{id}}" idArtist="{{artists.0.id}}">Click me to listen</spotify_button>
+        <br>
+        <br>
+        Tracks: 
+        <br>
+        {{#each tracks.items}}
+            {{track_number}}-{{name}}<br>
+        {{/each}}
+        <br>
+    </figure>
+</script>
+
+<!--Player Section-->
+<script id="player-template"type="text/x-handlebars-template">
+    <p style="float:left; width:50%">
+    <iframe src="https://embed.spotify.com/?uri={{uri}}" width="300" height="380" frameborder="0" allowtransparency="true">
+    </iframe>
+    </p>
+</script>
+
+<script id="recomendaciones-template" type="text/x-handlebars-template">
+    <div style="width:25%; height:330; float:left; background-color:black">
+        <h3>We recommend:</h3>
+        {{#each this}}
+            <div style="border:1px solid yellow">
+            hi
             </div>
         {{/each}}
-    {{else}}
-        <p>No se encontró ningún album :(</p>
-    {{/if}}
+    </div>
 </script>
 
 <style type="text/css">
