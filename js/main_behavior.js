@@ -136,15 +136,16 @@ $(document).ready(function(){
         }, 500);
     }
 
-    var destroy_div_info = function (idAlbum, div_class){
+    var createToggleDivInfo = function (idAlbum, div_class){
         var resume = true;
         if($("."+div_class).length > 0){
-            if($("."+div_class).attr("id")==id){
+            if($("."+div_class).attr("idAlbum")==idAlbum){
                 resume = false;
+                $("."+div_class).toggle('fast');
             }
-            $("."+div_class).fadeOut("fast", function(){
-                $(this).remove();
-            });
+            //$("."+div_class).fadeOut("fast", function(){
+            //    $(this).remove();
+            //});
             //$("."+div_class).remove();
         }
         return resume;
@@ -204,9 +205,9 @@ $(document).ready(function(){
 
     /////////////////////////////////////////----------ALBUMS----------/////////////////////////////////////////
     $(document).on('click', '.album', function(){
-        var resume = destroy_div_info($(this).attr('idAlbum'), "album_info");
+        var resume = createToggleDivInfo($(this).attr('idAlbum'), "albumInfoContainer");
         if(resume){
-            searchByAlbum($(this).attr("id"), $(this));
+            searchByAlbum($(this).attr("idAlbum"), $(this));
         }
     });
 
@@ -219,7 +220,7 @@ $(document).ready(function(){
             success: function (response){
                 //el.append('<div class="arrow-up" style="width:0; height:0px; border-left:15px solid transparent; border-right:15px solid transparent; border-bottom: 15px solid white; position:relative;"></div>')
                 el.parent().closest("div").after(album_info_template(response));
-                $(".album_info").fadeIn('slow');
+                $(".albumInfoContainer").fadeIn('slow');
             }
         });
     }
@@ -248,7 +249,7 @@ $(document).ready(function(){
     //show info of artist
      /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
-        var resume = destroy_div_info($(this).attr("idArtist"), "artist_info");
+        var resume = createToggleDivInfo($(this).attr("idArtist"), "artist_info");
         //console.log("resume" + resume);
         if(resume){
             searchByArtist($(this).attr("idArtist"), $(this), $(this).attr("nameArtist"));

@@ -204,7 +204,7 @@
             {{#moduloIf @index 0 3}}
                 <div id="cut">
             {{/moduloIf}}
-                <figure class="effect-sarah" class="album" idAlbum="{{id}}">
+                <figure class="effect-sarah album" idAlbum="{{id}}">
                     <img src="{{images.0.url}}" />
                     <figcaption>
                         <h2>{{name}}<h2>
@@ -220,7 +220,7 @@
 </script>
 
 <script id="albumInfo-template" type="text/x-handlebars-template">
-    <figure class="albumInfoContainer" idAlbum="{{id}}">
+    <figure class="albumInfoContainer div_info" idAlbum="{{id}}">
         <h1>{{name}}</h1>
         <br>
         <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
