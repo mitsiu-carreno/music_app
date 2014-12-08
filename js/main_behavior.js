@@ -152,6 +152,18 @@ $(document).ready(function(){
 
     var searchRelatedArtists = function (artist_id){
         console.log("artist_id " + artist_id);
+        $.ajax({
+            url: api_spotify +"artists/"+ idtrack +"/related-artists",
+                success: function(response){
+                    /*
+                    jQuery.each(response.artists, function(index, value) {
+                        $.ajax({
+                            searchtopTRacks
+                        });
+                    });    
+                    */
+                }
+        });
     }
     /////////////////////////////////////////----------TRACKS----------/////////////////////////////////////////
 
