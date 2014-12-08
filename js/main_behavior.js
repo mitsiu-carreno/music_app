@@ -140,15 +140,26 @@ $(document).ready(function(){
         var resume = true;
         if($("."+div_class).length > 0){
             if($("."+div_class).attr("idAlbum")==idAlbum){
+                console.log("found");
                 resume = false;
-                $("."+div_class).toggle('fast');
+                $("#"+idAlbum+".albumInfoContainer").toggle("fast");
             }
-            //$("."+div_class).fadeOut("fast", function(){
-            //    $(this).remove();
-            //});
+        }
+        return resume;
+        /*
+        var resume = true;
+        if($("."+div_class).length > 0){
+            if($("."+div_class).attr("idAlbum")==idAlbum){
+                resume = false;
+                //$("."+div_class).toggle('fast');
+            }
+            $("."+div_class).fadeOut("fast", function(){
+                $(this).remove();
+            });
             //$("."+div_class).remove();
         }
         return resume;
+        */
     }
 
     var searchRelatedArtists = function (artist_id){
@@ -225,10 +236,10 @@ $(document).ready(function(){
         });
     }
 
-    $(document).on('click', '.play_album', function(){
-        var artist_id = $(this).attr("artist_id");
-        var uri = {"uri": "spotify:album:" + $(this).attr("id")}
-        go_to_player(uri,artist_id);
+    $(document).on('click', '.playAlbum', function(){
+        var idArtist = $(this).attr("idArtist");
+        var uri = {"uri": "spotify:album:" + $(this).attr("idAlbum")}
+        go_to_player(uri,idArtist);
     });
 
     /*  VERIFICAR USO

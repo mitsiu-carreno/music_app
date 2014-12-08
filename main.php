@@ -220,7 +220,7 @@
 </script>
 
 <script id="albumInfo-template" type="text/x-handlebars-template">
-    <figure class="albumInfoContainer div_info" idAlbum="{{id}}">
+    <figure class="albumInfoContainer" idAlbum="{{id}}">
         <h1>{{name}}</h1>
         <br>
         <h2>by {{#each artists}}{{name}}<br>{{/each}}</h2>
@@ -282,7 +282,8 @@
     border: 5px solid #e45343;
 }
 
-.div_info{
+.albumInfoContainer,
+.artistInfoContainer{
     width:95% !important; 
     max-width:95% !important; 
     border:2px solid white; 
