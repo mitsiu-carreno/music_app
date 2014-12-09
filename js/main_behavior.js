@@ -139,7 +139,7 @@ $(document).ready(function(){
     var createToggleDivInfo = function (id, div_class){
         var resume = true;
         if($("."+div_class).length > 0){
-            if($("."+div_class).attr("id")==id){
+            if($("."+div_class).attr("idAlbum")==id || $("."+div_class).attr("idArtist")){
                 resume = false;
                 //$("."+div_class).toggle('fast');
             }
@@ -250,7 +250,7 @@ $(document).ready(function(){
     //show info of artist
      /*var artist_info = '<figure style="width:900px; max-width:900px" class="album_info">TEST Artist-info</figure>'*/
      $(document).on('click', '.artist', function(){
-        var resume = createToggleDivInfo($(this).attr("idArtist"), "artist_info");
+        var resume = createToggleDivInfo($(this).attr("idArtist"), "artistInfoContainer");
         //console.log("resume" + resume);
         if(resume){
             searchByArtist($(this).attr("idArtist"), $(this), $(this).attr("nameArtist"));
@@ -271,7 +271,7 @@ $(document).ready(function(){
                 //console.log(response);
                 response = seachAlbumTracksByArtist(response);
                 el.parent().closest("div").after(artist_info_template(response));
-                $(".artist_info").fadeIn('slow');
+                $(".artistInfoContainer").fadeIn('slow');
                 //$(".artist_info").append(album_template(response));
                 //resultsPlaceholder.innerHTML = artist_template(response);
                 //$("#albumsByArtist").html(partial_albumsByArtist(response));
@@ -279,10 +279,10 @@ $(document).ready(function(){
         });
     } 
 
-    $(document).on("click", ".play_top", function(){
-        var artist_id = $(this).attr("id");
-        var uri = {"uri": "spotify:artist:" + artist_id}
-        go_to_player(uri, artist_id);
+    $(document).on("click", ".playTop", function(){
+        var idArtist = $(this).attr("idArtist");
+        var uri = {"uri": "spotify:artist:" + idArtist}
+        go_to_player(uri, idArtist);
     });
 
     var seachAlbumTracksByArtist= function(albums){
@@ -311,7 +311,7 @@ $(document).ready(function(){
         return albums;
     }
 
-    $(document).on("click", ".display_album_info_byArtist", function(){
+    $(document).on("click", ".displayAlbumInfoByArtist", function(){
         $(this).next().toggle();
     });
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
