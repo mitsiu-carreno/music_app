@@ -138,24 +138,17 @@ $(document).ready(function(){
 
     var createToggleDivInfo = function (id, div_class){
         var resume = true;
-        var element = $("."+div_class);
-        if(element.length > 0){
-            if(element.attr("idAlbum")==id){
+        if($("."+div_class).length > 0){
+            if($("."+div_class).attr("id")==id){
                 resume = false;
                 //$("."+div_class).toggle('fast');
             }
-            if(element.is(":visible") ){
-                element.fadeOut("fast");
-            }
-            else{
-                element.fadeIn("fast");
-            }
-            //$("."+div_class).fadeOut("fast", function(){
-                //$(this).remove();
-            //});
+            $("."+div_class).fadeOut("fast", function(){
+                $(this).remove();
+            });
+            //$("."+div_class).remove();
         }
         return resume;
-    
     
     }
 
