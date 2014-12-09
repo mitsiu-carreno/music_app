@@ -314,6 +314,7 @@ $(document).ready(function(){
     $(document).on("click", ".displayAlbumInfoByArtist", function(){
         $(this).next().toggle();
     });
+
     /////////////////////////////////////////----------HELPERS----------/////////////////////////////////////////
 
     Handlebars.registerHelper("addTracks", function (text, url) {
