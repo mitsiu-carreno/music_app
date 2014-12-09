@@ -136,30 +136,27 @@ $(document).ready(function(){
         }, 500);
     }
 
-    var createToggleDivInfo = function (idAlbum, div_class){
+    var createToggleDivInfo = function (id, div_class){
         var resume = true;
-        if($("."+div_class).length > 0){
-            if($("."+div_class).attr("idAlbum")==idAlbum){
-                console.log("found");
-                resume = false;
-                $("#"+idAlbum+".albumInfoContainer").toggle("fast");
-            }
-        }
-        return resume;
-        /*
-        var resume = true;
-        if($("."+div_class).length > 0){
-            if($("."+div_class).attr("idAlbum")==idAlbum){
+        var element = $("."+div_class);
+        if(element.length > 0){
+            if(element.attr("idAlbum")==id){
                 resume = false;
                 //$("."+div_class).toggle('fast');
             }
-            $("."+div_class).fadeOut("fast", function(){
-                $(this).remove();
-            });
-            //$("."+div_class).remove();
+            if(element.is(":visible") ){
+                element.fadeOut("fast");
+            }
+            else{
+                element.fadeIn("fast");
+            }
+            //$("."+div_class).fadeOut("fast", function(){
+                //$(this).remove();
+            //});
         }
         return resume;
-        */
+    
+    
     }
 
     var searchRelatedArtists = function (artist_id){
