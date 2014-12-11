@@ -291,6 +291,16 @@
     display:none;
     cursor:auto !important;
 }
+.effect-sarah:after {
+    content:'';
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-top: solid 50px #e15915;
+    border-left: solid 50px transparent;
+    border-right: solid 50px transparent;
+}
 spotify_button{
     border-radius: 500px;
     border-width: 2px;
