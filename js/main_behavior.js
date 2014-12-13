@@ -187,7 +187,7 @@ $(document).ready(function(){
             url:api_spotify +"tracks/"+ id,
             success: function(response){
                 go_to_player(response, response.artists[0].id);
-                response = {"response":response}
+                response = {"track":response}
                 $.ajax({
                     type: "POST",
                     url: global_url + "beans/insert.php",

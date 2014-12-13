@@ -22,7 +22,6 @@ class track{
 }
 
 class album{
-
 	public $idAlbum;	
 	public $album;	
 	public $uri;		
@@ -31,7 +30,6 @@ class album{
 	public $image;	
 	public $releaseDay;	
 	public $popularity;
-	public $vecesReproducida;
 
 	function __construct($response){
 	$this->idAlbum = $response[""];
@@ -42,6 +40,5 @@ class album{
 	$this->image = $response[""][""];
 	$this->releaseDay = $response[""][""];
 	$this->popularity = $response[""][""];
-	$this->vecesReproducida = $response[""][""];
 	}	
 }

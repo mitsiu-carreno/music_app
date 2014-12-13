@@ -5,11 +5,11 @@ try{
 	$db = new PDO(
 		'mysql:host=localhost;dbname=music_app', $user, $pass);
 	
-	/*
-	foreach($db ->query('select * from albumType') as $row){
+	
+	foreach($db ->query('select * from albumTypes') as $row){
 		print_r($row);
 	}
-	*/
+	echo 'test';
 	//$db = null;
 } catch (PDOException $e){
 	print "Error!!: " . $e->getMessage() . "<br/>";

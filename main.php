@@ -18,6 +18,7 @@
     <div id="vs-container" class="vs-container">
             <header class="vs-header">
                 <h1>Search for an Artist/Album/Track</h1>
+                http://jsfiddle.net/NFTFw/29/
                     <form id="search-form">
                         <input type="text" id="query" value="hans zimmer" class="form-control" />
                         <input type="submit" id="search" class="btn btn-primary" value="Search" />
