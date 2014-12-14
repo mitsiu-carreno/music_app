@@ -183,23 +183,15 @@ $(document).ready(function(){
     $(document).on('click', '.track', function(e){              //01010100101010 OPTIMIZAR con albums (y artistas??)
         e.preventDefault();
         var id=$(this).attr("idTrack");
+        var uri = $(this).attr("uri");
+        var artist =$(this).attr("idArtist");
+        go_to_player(uri, idArtist);
         $.ajax({
             url:api_spotify +"tracks/"+ id,
             success: function(response){
                 go_to_player(response, response.artists[0].id);
                 response = {"track":response}
-                $.ajax({
-                    type: "POST",
-                    url: global_url + "beans/insert.php",
-                    data: response,
-                    
-                    success: function(result){
-                        console.log(result);        //<----INCOMPETE
-                    },
-                    error: function (request, status, errorThrown){
-                        console.log("Saving error:" + status, errorThrown);
-                    }
-                });
+                
             }
         });
     });
@@ -381,4 +373,19 @@ $(document).ready(function(){
         return [recommendedTracks1, recommendedTracks2];
     }
 
+*/
+
+/*SAVE ON DB CODE
+$.ajax({
+    type: "POST",
+    url: global_url + "beans/insert.php",
+    data: response,
+    
+    success: function(result){
+        console.log(result);        //<----INCOMPETE
+    },
+    error: function (request, status, errorThrown){
+        console.log("Saving error:" + status, errorThrown);
+    }
+});
 */

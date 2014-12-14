@@ -87,7 +87,7 @@
             {{#moduloIf @index 0 3}}
                 <div id="cut">
             {{/moduloIf}}
-                <figure class="effect-sadie track" idTrack="{{id}}">
+                <figure class="effect-sadie track" idTrack="{{id}}" uri="{{uri}}">
                         <img src="{{album.images.0.url}}"/>
                         <figcaption>
                             <h2>{{name}}</h2>
@@ -177,7 +177,7 @@
                     {{#each tracks}}{{name}}<br>{{/each}}   
                     <div style="margin-top:15px"></div>
                 </div>
-                <spotify_button class="playAlbum" idAlbum="{{id}}" idArtist="{{../artist_id}}">Listen Album</spotify_button>
+                <spotify_button class="playAlbum" idAlbum="{{id}}" idArtist="{{../artist_id}}" uri="{{uri}}">Listen Album</spotify_button>
             </div>
         {{/each}}
     {{else}}
